@@ -116,9 +116,8 @@
                           v-for="item in todos"
                           :key="item.id"
                           xs12 sm6 md4
-  
                         >
-                          <v-card :href="item.link" flat tile hover :data-filter="item.data">
+                          <v-card target="_blanck" :href="item.link" flat tile hover :data-filter="item.data">
                             <v-card-media
                               :src="item.image"
                               height="250"
@@ -140,7 +139,7 @@
                           :key="item.id"
                           xs12 sm6 md4
                         >
-                          <v-card flat tile hover :data-filter="item.data">
+                          <v-card :href="item.link" flat tile hover :data-filter="item.data">
                             <v-card-media
                               :src="item.image"
                               height="250"
@@ -179,19 +178,16 @@
         </v-flex>
       </section>
       <!-- end tabs -->
-      <!-- grid -->
-      
-      <!-- end grid -->
       <!-- progress bar -->
       <section id="skill">
         <v-container grid-list-xl>
           <v-flex  class="my-2" xs12 md8>
-                <v-card class="elevation-0 transparent">
-                  <v-card-title primary-title class="layout">
-                    <div class="headline">Skills</div><v-icon medium color="orange">start</v-icon>
-                  </v-card-title>
-                </v-card>
-              </v-flex>
+              <v-card class="elevation-0 transparent">
+                <v-card-title primary-title class="layout">
+                  <div class="headline">Skills</div><v-icon medium color="orange">start</v-icon>
+                </v-card-title>
+              </v-card>
+            </v-flex>
           <v-layout row wrap justify-center class="my-5">
             <v-flex xs12>
               <div>
@@ -205,15 +201,164 @@
                 <v-progress-linear value="60" height="20" color="info"></v-progress-linear>
                 <h3>Material desing(vuetify, material angular etc.)</h3>
                 <v-progress-linear value="60" height="20" color="deep-purple darken-1"></v-progress-linear>
-                <h3>Html y css</h3>
-                <v-progress-linear value="75" height="20" color="orange"></v-progress-linear>
-                <h3>webpack</h3>
-                <v-progress-linear value="70" height="20" color="grey"></v-progress-linear>
               </div>
             </v-flex>
           </v-layout>
         </v-container>
       </section>
+      <!-- more skill -->
+      <v-card flat>
+    <v-card-text>
+      <v-container>
+        <v-layout row wrap>
+          <v-flex xs12>
+            <v-flex  class="my-2" xs12 md8>
+              <v-card class="elevation-0 transparent">
+                <v-card-title primary-title class="layout">
+                  <div class="headline">Mas habilidades...</div>
+                </v-card-title>
+              </v-card>
+            </v-flex>
+          </v-flex>
+        </v-layout>
+      </v-container>
+      <v-container>
+        <v-layout row wrap>
+          <v-flex xs12 sm4 md3>
+            <v-checkbox
+              v-model="ex4"
+              label="webpack"
+              color="blue lighten-1"
+              value="webpack"
+              hide-details
+            ></v-checkbox>
+            <v-checkbox
+              v-model="ex4"
+              label="npm"
+              color="red darken-3"
+              value="npm"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+          <v-flex xs12 sm4 md3>
+            <v-checkbox
+              v-model="ex4"
+              label="linux"
+              color="indigo"
+              value="linux"
+              hide-details
+            ></v-checkbox>
+            <v-checkbox
+              v-model="ex4"
+              label="html"
+              color="indigo darken-3"
+              value="html"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+          <v-flex xs12 sm4 md3>
+            <v-checkbox
+              v-model="ex4"
+              label="css"
+              color="orange"
+              value="css"
+              hide-details
+            ></v-checkbox>
+            <v-checkbox
+              v-model="ex4"
+              label="bootstrap"
+              color="orange darken-3"
+              value="bootstrap"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+          <v-flex xs12 sm4 md3>
+            <v-checkbox
+              v-model="ex4"
+              label="css-grid"
+              color="primary"
+              value="css-grid"
+              hide-details
+            ></v-checkbox>
+            <v-checkbox
+              v-model="ex4"
+              label="foundation"
+              color="secondary"
+              value="foundation"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+        </v-layout>
+
+        <v-layout row wrap class="mt-5">
+          <v-flex xs12 sm4 md3>
+            <v-checkbox
+              v-model="ex4"
+              label="git"
+              color="primary"
+              value="git"
+              hide-details
+            ></v-checkbox>
+            <v-checkbox
+              v-model="ex4"
+              label="mysql"
+              color="secondary"
+              value="mysql"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+          <v-flex xs12 sm4 md3>
+            <v-checkbox
+              v-model="ex4"
+              label="mongo"
+              color="primary"
+              value="mongo"
+              hide-details
+            ></v-checkbox>
+            <v-checkbox
+              v-model="ex4"
+              label="ingles-basico"
+              color="secondary"
+              value="ingles-basico"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+          <v-flex xs12 sm4 md3>
+            <v-checkbox
+              v-model="ex4"
+              label="php"
+              color="success"
+              value="php"
+              hide-details
+            ></v-checkbox>
+            <v-checkbox
+              v-model="ex4"
+              label="javascript"
+              color="info"
+              value="javascript"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+          <v-flex xs12 sm4 md3>
+            <v-checkbox
+              v-model="ex4"
+              label="poo"
+              color="warning"
+              value="poo"
+              hide-details
+            ></v-checkbox>
+            <v-checkbox
+              v-model="ex4"
+              label="express"
+              color="error"
+              value="express"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card-text>
+  </v-card>
       <!-- contact -->
       <section id="contact">
         <v-container grid-list-xl>
@@ -273,24 +418,24 @@
           </v-flex>
         </v-layout>
         <v-snackbar
-      v-model="snackbar"
-      :bottom="y === 'bottom'"
-      :left="x === 'left'"
-      :multi-line="mode === 'multi-line'"
-      :right="x === 'right'"
-      :timeout="timeout"
-      :top="y === 'top'"
-      :vertical="mode === 'vertical'"
-    >
-      {{ text }}
-      <v-btn
-        color="pink"
-        flat
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
-    </v-snackbar>
+          v-model="snackbar"
+          :bottom="y === 'bottom'"
+          :left="x === 'left'"
+          :multi-line="mode === 'multi-line'"
+          :right="x === 'right'"
+          :timeout="timeout"
+          :top="y === 'top'"
+          :vertical="mode === 'vertical'"
+        >
+          {{ text }}
+          <v-btn
+            color="pink"
+            flat
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </v-snackbar>
       </v-footer>
     </v-content>
   </v-app>
@@ -314,6 +459,7 @@ import cap2 from './assets/cap2.png'
 import cap3 from './assets/trade.png'
 import cap5 from './assets/cap5.png'
 import cap6 from './assets/cap6.png'
+import cap7 from './assets/go.png'
 import git from './assets/git.png'
 
 export default {
@@ -340,11 +486,12 @@ export default {
         {id: 8, image: img_8},
       ],
       todos: [
+        {id: 5, image: cap7, link: 'https://goatlas-fairplaay.firebaseapp.com/'},
         {id: 10, image: cap1, link: 'https://crud-node19233.firebaseapp.com/'},
         {id: 11, image: cap2, link: 'https://fairplaay.herokuapp.com/'},
-        {id: 12, image: cap3},
-        {id: 13, image: cap5},
-        {id: 14, image: cap6},
+        {id: 12, image: cap3, link: 'https://github.com/Fairplaay/Trade'},
+        {id: 13, image: cap5, link: 'https://github.com/Fairplaay/platzi-video'},
+        {id: 14, image: cap6, link: 'https://github.com/Fairplaay/votaOnline'},
         {id: 9, image: img_9},
         {id: 15, image: img_10},
         {id: 1, image: img_1},
@@ -357,18 +504,20 @@ export default {
         {id: 8, image: img_8},
       ],
       trabajos: [
-        {id: 1, image: cap1},
-        {id: 2, image: cap2},
-        {id: 3, image: cap3},
-        {id: 4, image: cap5},
-        {id: 14, image: cap6},
+        {id: 6, image: cap7, link: 'https://goatlas-fairplaay.firebaseapp.com/'},
+        {id: 1, image: cap1, link: 'https://crud-node19233.firebaseapp.com/'},
+        {id: 2, image: cap2, link: 'https://fairplaay.herokuapp.com/'},
+        {id: 3, image: cap3, link: 'https://github.com/Fairplaay/Trade'},
+        {id: 4, image: cap5, link: 'https://github.com/Fairplaay/platzi-video'},
+        {id: 5, image: cap6, link: 'https://github.com/Fairplaay/votaOnline'},
       ],
       snackbar: true,
       y: 'bottom',
       x: null,
       mode: '',
       timeout: 6000,
-      text: 'Bienvenido.!'
+      text: 'Bienvenido.!',
+      ex4: ['webpack', 'npm', 'linux', 'html', 'css', 'bootstrap', 'css-grid', 'foundation', 'git', 'mysql', 'mongo', 'ingles-basico', 'php', 'javascript', 'poo', 'express']
     }
   },
   methods: {
