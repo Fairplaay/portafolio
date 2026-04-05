@@ -1,10 +1,16 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 import sanity from '@sanity/astro';
 
 export default defineConfig({
   site: 'https://portafolio-jesusgarcia.pages.dev',
   integrations: [
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
     tailwind(),
     sanity({
       projectId: process.env.PUBLIC_SANITY_PROJECT_ID || '',
