@@ -1,8 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-
-const sanity = (await import('@sanity/astro')).default;
+import sanity from '@sanity/astro';
 
 export default defineConfig({
   site: 'https://jesusgarcia.dev',
