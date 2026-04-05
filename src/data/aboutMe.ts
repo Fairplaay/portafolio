@@ -25,6 +25,7 @@ export const aboutMe = {
   socialMedia: {
     linkedin: 'https://www.linkedin.com/in/fairplaay',
     github: 'https://github.com/Fairplaay',
-    medium: 'https://medium.com/@fairplaay16',
+    youtube: 'https://youtube.com',
+    website: 'https://fairplaay.dev',
   }
 };
