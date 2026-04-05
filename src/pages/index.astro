@@ -1,0 +1,161 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import ShowroomGrid from '../components/ShowroomGrid.astro';
+
+import { useSanityClient } from '@sanity/astro';
+
+const projects = await useSanityClient().fetch(`*[_type == "project"]|order(order asc)[0...6]{
+  title,
+  slug,
+  description,
+  "image": image.asset->url,
+  tags,
+  demoUrl,
+  githubUrl,
+  order
+}`);
+---
+
+<Layout title="Jesus Garcia | Full-Stack Developer & Trading Analyst">
+  <Navbar />
+  
+  <main>
+    <Hero />
+    
+    <section id="showroom" class="py-20 bg-steel-900">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-display font-bold text-center mb-4 text-chrome">
+          SHOWROOM <span class="text-accent">DIGITAL</span>
+        </h2>
+        <p class="text-center text-chrome/60 mb-12 max-w-2xl mx-auto">
+          Productos y soluciones comerciales desarrolladas con tecnología de punta
+        </p>
+        <ShowroomGrid />
+      </div>
+    </section>
+    
+    <section id="proyectos" class="py-20 bg-steel-800">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-display font-bold text-center mb-4 text-chrome">
+          PROYECTOS <span class="text-accent">TECH</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+          {projects.length > 0 ? projects.map((project: any) => (
+            <article class="card-industrial group">
+              {project.image && (
+                <figure class="aspect-video overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </figure>
+              )}
+              <div class="p-6">
+                <h3 class="text-xl font-display font-semibold text-chrome mb-2">
+                  {project.title}
+                </h3>
+                <p class="text-chrome/70 text-sm mb-4 line-clamp-3">
+                  {project.description}
+                </p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {project.tags?.map((tag: string) => (
+                    <span class="badge badge-outline border-steel-500 text-chrome/70 text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div class="flex gap-3">
+                  {project.demoUrl && (
+                    <a href={project.demoUrl} target="_blank" class="btn btn-sm btn-industrial">
+                      Demo
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" class="btn btn-sm btn-outline border-steel-500 text-chrome hover:bg-steel-700">
+                      GitHub
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          )) : (
+            <div class="col-span-full text-center py-12">
+              <p class="text-chrome/50">Configura Sanity CMS para mostrar proyectos</p>
+              <a href="/admin" class="btn btn-industrial mt-4">
+                Ir al Admin
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+    
+    <section id="contacto" class="py-20 bg-steel-900">
+      <div class="container mx-auto px-4 max-w-2xl">
+        <h2 class="text-4xl font-display font-bold text-center mb-4 text-chrome">
+          CONTACTO <span class="text-accent">DIRECTO</span>
+        </h2>
+        <p class="text-center text-chrome/60 mb-8">
+          ¿Tienes un proyecto? Hablemos por WhatsApp
+        </p>
+        
+        <div class="card-industrial p-8">
+          <form class="space-y-4" id="contact-form">
+            <div class="form-control">
+              <label class="label">
+                <span class="text-chrome">Nombre</span>
+              </label>
+              <input 
+                type="text" 
+                name="name"
+                placeholder="Tu nombre" 
+                class="input input-bordered bg-steel-700 border-steel-500 text-chrome placeholder:text-chrome/30"
+                required
+              />
+            </div>
+            
+            <div class="form-control">
+              <label class="label">
+                <span class="text-chrome">Mensaje</span>
+              </label>
+              <textarea 
+                name="message"
+                placeholder="¿En qué puedo ayudarte?" 
+                class="textarea textarea-bordered bg-steel-700 border-steel-500 text-chrome placeholder:text-chrome/30 h-32"
+                required
+              ></textarea>
+            </div>
+            
+            <button 
+              type="submit" 
+              class="btn w-full bg-accent text-steel-900 hover:bg-accent-hover border-none font-semibold"
+            >
+              Enviar por WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const name = formData.get('name');
+    const message = formData.get('message');
+    
+    const whatsappMessage = encodeURIComponent(`Hola Jesus, soy ${name}. ${message}`);
+    const whatsappUrl = `https://wa.me/584242292287?text=${whatsappMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+  });
+</script>

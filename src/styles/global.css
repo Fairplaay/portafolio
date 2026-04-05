@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark, corporate, industrial;
+}
+
+@theme {
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --color-steel-900: #0d1117;
+  --color-steel-800: #161b22;
+  --color-steel-700: #21262d;
+  --color-steel-600: #30363d;
+  --color-steel-500: #484f58;
+  --color-chrome: #e6edf3;
+  --color-accent: #00d9ff;
+  --color-accent-hover: #00b8d9;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-steel-900 text-chrome font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-wide;
+  }
+}
+
+@layer components {
+  .btn-industrial {
+    @apply btn bg-steel-700 border-steel-500 hover:bg-steel-600 hover:border-chrome text-chrome transition-all duration-300;
+  }
+  
+  .card-industrial {
+    @apply bg-steel-800 border border-steel-600 rounded-lg overflow-hidden hover:border-accent transition-colors duration-300;
+  }
+  
+  .glass-panel {
+    @apply bg-steel-800/80 backdrop-blur-md border border-steel-600/50;
+  }
+}
