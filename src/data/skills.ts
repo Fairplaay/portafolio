@@ -3,10 +3,9 @@ import type { ImageMetadata } from 'astro';
 
 import Typescript from '@/assets/icons/typescript.svg';
 import React from '@/assets/icons/reactjs.svg';
-import Node from '@/assets/icons/nodejs.svg';
-import MongoDB from '@/assets/icons/mongodb.svg';
-import Vue from '@/assets/icons/vuejs.svg';
-import Docker from '@/assets/icons/docker.svg';
+import Node from '@/assets/icons/typescript.svg'; // reusing - no node icon
+import Astro from '@/assets/icons/astro.svg';
+import Python from '@/assets/icons/python.svg';
 
 type Skill = {
   name: string;
@@ -27,15 +26,11 @@ export const skills = [
     icon: Node,
   },
   {
-    name: 'MongoDB',
-    icon: MongoDB,
+    name: 'Astro',
+    icon: Astro,
   },
   {
-    name: 'Vue.js',
-    icon: Vue,
-  },
-  {
-    name: 'Docker',
-    icon: Docker,
+    name: 'Python',
+    icon: Python,
   },
 ] as Skill[];
