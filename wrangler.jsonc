@@ -1,15 +1,13 @@
 {
-  "name": "portafolio-jesus-garcia",
-  "compatibility_date": "2024-12-18",
-  "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": "./dist",
-  "env": {
-    "PUBLIC_SANITY_PROJECT_ID": {
-      "type": "string"
-    },
-    "PUBLIC_SANITY_DATASET": {
-      "type": "string",
-      "default": "production"
+  name: "fairplaay-portafolio",
+  compat_date: "2026-04-05",
+  pages_build_overrides: {
+    "src/pages": {
+      "vite_config": "./vite.config.mjs"
     }
+  },
+  vars: {
+    "PUBLIC_SANITY_PROJECT_ID": "ix45pdgt",
+    "PUBLIC_SANITY_DATASET": "production"
   }
 }
