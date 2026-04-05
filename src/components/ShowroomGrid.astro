@@ -1,0 +1,116 @@
+---
+import { useSanityClient } from '@sanity/astro';
+
+const products = await useSanityClient().fetch(`*[_type == "product"]|order(order asc)[0...8]{
+  title,
+  slug,
+  description,
+  "image": image.asset->url,
+  price,
+  brand,
+  hp,
+  category,
+  order
+}`);
+
+const categories = ['Todos', 'Trading Bots', 'Dashboards', 'APIs', 'Software'];
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="showroom-grid">
+  <!-- Filter tabs -->
+  <div class="col-span-full flex flex-wrap justify-center gap-2 mb-8">
+    {categories.map((cat, i) => (
+      <button 
+        class={`btn btn-sm ${i === 0 ? 'bg-accent text-steel-900' : 'btn-outline border-steel-500 text-chrome'} filter-btn`}
+        data-category={cat}
+      >
+        {cat}
+      </button>
+    ))}
+  </div>
+  
+  {products.length > 0 ? products.map((product: any) => (
+    <div class="card-industrial group cursor-pointer" data-category={product.category}>
+      {product.image && (
+        <figure class="aspect-square overflow-hidden relative">
+          <img 
+            src={product.image} 
+            alt={product.title}
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-steel-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="absolute bottom-4 left-4 right-4">
+              <a 
+                href={`#contacto?product=${product.slug?.current}`}
+                class="btn btn-sm bg-accent text-steel-900 w-full font-semibold"
+              >
+                Consultar
+              </a>
+            </div>
+          </div>
+        </figure>
+      )}
+      <div class="p-4">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-lg font-display font-semibold text-chrome">
+            {product.title}
+          </h3>
+          {product.price && (
+            <span class="text-accent font-bold font-mono">
+              ${product.price}
+            </span>
+          )}
+        </div>
+        
+        {product.brand && (
+          <p class="text-chrome/50 text-xs mb-2">{product.brand}</p>
+        )}
+        
+        <p class="text-chrome/70 text-sm mb-3 line-clamp-2">
+          {product.description}
+        </p>
+        
+        {product.hp && (
+          <div class="flex items-center gap-2">
+            <span class="badge badge-sm bg-steel-700 text-chrome border-none">
+              ⚡ {product.hp} HP
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  )) : (
+    <div class="col-span-full text-center py-12">
+      <div class="text-6xl mb-4">🏗️</div>
+      <p class="text-chrome/50 mb-4">Showroom en construcción</p>
+      <p class="text-chrome/30 text-sm">Agrega productos desde Sanity CMS</p>
+    </div>
+  )}
+</div>
+
+<script>
+  // Filter functionality
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = (btn as HTMLElement).dataset.category;
+      
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-accent', 'text-steel-900');
+        b.classList.add('btn-outline', 'border-steel-500', 'text-chrome');
+      });
+      btn.classList.add('bg-accent', 'text-steel-900');
+      btn.classList.remove('btn-outline', 'border-steel-500', 'text-chrome');
+      
+      // Filter products
+      document.querySelectorAll('#showroom-grid .card-industrial[data-category]').forEach(card => {
+        const cardCategory = (card as HTMLElement).dataset.category;
+        if (category === 'Todos' || cardCategory === category) {
+          (card as HTMLElement).style.display = '';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

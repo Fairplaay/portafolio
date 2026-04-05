@@ -1,0 +1,115 @@
+---
+// Hero Cinemático
+const typingTexts = [
+  'Full-Stack Developer',
+  'Vue & Node.js Expert',
+  'Trading Analyst',
+  'XAU/USD Scalper'
+];
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-steel-900">
+  <!-- Background animated -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-gradient-to-br from-steel-900 via-steel-800 to-steel-900"></div>
+    <div class="absolute inset-0 opacity-30">
+      <div class="grid-pattern"></div>
+    </div>
+    <!-- Animated glow -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  </div>
+  
+  <!-- Content -->
+  <div class="relative z-10 text-center px-4 max-w-4xl">
+    <div class="mb-6">
+      <span class="inline-block px-4 py-2 bg-steel-800/80 border border-steel-600 rounded-full text-accent text-sm font-mono">
+        &lt;Hello World /&gt;
+      </span>
+    </div>
+    
+    <h1 class="text-5xl md:text-7xl font-display font-bold text-chrome mb-4">
+      Jesus <span class="text-accent">Garcia</span>
+    </h1>
+    
+    <p class="text-xl md:text-2xl text-chrome/70 font-mono mb-8">
+      <span class="typing-text" data-texts={JSON.stringify(typingTexts)}></span>
+      <span class="animate-pulse">|</span>
+    </p>
+    
+    <p class="text-lg text-chrome/50 max-w-2xl mx-auto mb-10">
+      Desarrollador Full-Stack con experiencia en Vue.js, Node.js y MongoDB. 
+      Analista de trading especializado en XAU/USD y deportes profesionales.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#proyectos" class="btn btn-lg bg-accent text-steel-900 hover:bg-accent-hover border-none font-semibold">
+        Ver Proyectos
+      </a>
+      <a href="#contacto" class="btn btn-lg btn-outline border-steel-500 text-chrome hover:bg-steel-700 hover:border-chrome">
+        Contactar
+      </a>
+    </div>
+    
+    <!-- Tech stack -->
+    <div class="mt-16 flex flex-wrap justify-center gap-4">
+      {['Vue.js', 'Node.js', 'MongoDB', 'Astro', 'Tailwind', 'MT5'].map(tech => (
+        <span class="px-3 py-1 bg-steel-800 border border-steel-600 rounded text-chrome/70 text-sm font-mono">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+  
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-chrome/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+</style>
+
+<script>
+  // Typing effect
+  const typingElement = document.querySelector('.typing-text') as HTMLElement;
+  if (typingElement) {
+    const texts = JSON.parse(typingElement.dataset.texts || '[]');
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    const type = () => {
+      const currentText = texts[textIndex];
+      
+      if (isDeleting) {
+        typingElement.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingElement.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+      }
+      
+      if (!isDeleting && charIndex === currentText.length) {
+        isDeleting = true;
+        setTimeout(type, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        setTimeout(type, 500);
+      } else {
+        setTimeout(type, isDeleting ? 50 : 100);
+      }
+    };
+    
+    type();
+  }
+</script>
