@@ -6,41 +6,39 @@ import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import ShowroomGrid from '../components/ShowroomGrid.astro';
 
-import { useSanityClient } from '@sanity/astro';
-
-// Type definitions for better DX
-interface Project {
-  title: string;
-  slug: { current: string };
-  description: string;
-  image: string;
-  tags: string[];
-  demoUrl: string;
-  githubUrl: string;
-  order: number;
-}
-
-// Fetch projects with error handling
-let projects: Project[] = [];
-let error = false;
-
-try {
-  const client = useSanityClient();
-  projects = await client.fetch<Project[]>(`*[_type == "project"]|order(order asc)[0...6]{
-    title,
-    "slug": slug.current,
-    description,
-    "image": image.asset->url,
-    tags,
-    demoUrl,
-    githubUrl,
-    order
-  }`);
-} catch (e) {
-  // Fail gracefully - show placeholder content
-  error = true;
-  console.error('Sanity fetch error:', e);
-}
+// Static project data (replace with Sanity CMS later)
+const projects = [
+  {
+    title: 'Sistema de Trading',
+    slug: 'trading-system',
+    description: 'Sistema automatizado de trading para XAU/USD con señales en tiempo real',
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a0?w=800&auto=format&fit=crop',
+    tags: ['Vue.js', 'Node.js', 'MongoDB'],
+    demoUrl: '#',
+    githubUrl: 'https://github.com/Fairplaay/xau-trading-strategies',
+    order: 1,
+  },
+  {
+    title: 'Analytics Deportivo',
+    slug: 'sports-analytics',
+    description: 'Plataforma de análisis para MLB, NBA y NHL con datos en tiempo real',
+    image: 'https://images.unsplash.com/photo-1569517282132-2742a3616a0c?w=800&auto=format&fit=crop',
+    tags: ['Vue.js', 'API', 'ESPN'],
+    demoUrl: '#',
+    githubUrl: 'https://github.com/Fairplaay/bot_sport_scrapping',
+    order: 2,
+  },
+  {
+    title: 'Portafolio Personal',
+    slug: 'portfolio',
+    description: 'Portafolio profesional con diseño industrial moderno',
+    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&auto=format&fit=crop',
+    tags: ['Astro', 'Tailwind', ' DaisyUI'],
+    demoUrl: '#',
+    githubUrl: 'https://github.com/Fairplaay/portafolio',
+    order: 3,
+  },
+];
 ---
 
 <Layout title="Jesus Garcia | Full-Stack Developer & Trading Analyst">
@@ -68,7 +66,7 @@ try {
         </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {projects.length > 0 ? projects.map((project) => (
+          {projects.map((project) => (
             <article class="card-industrial group">
               {project.image && (
                 <figure class="aspect-video overflow-hidden">
@@ -88,7 +86,7 @@ try {
                   {project.description}
                 </p>
                 <div class="flex flex-wrap gap-2 mb-4">
-                  {project.tags?.map((tag) => (
+                  {project.tags.map((tag) => (
                     <span class="badge badge-outline border-steel-500 text-chrome/70 text-xs">
                       {tag}
                     </span>
@@ -108,16 +106,7 @@ try {
                 </div>
               </div>
             </article>
-          )) : (
-            <div class="col-span-full text-center py-12">
-              <p class="text-chrome/50">
-                {error ? 'Error cargando proyectos. Configura Sanity CMS.' : 'No hay proyectos aún.'}
-              </p>
-              <a href="https://www.sanity.io/manage" target="_blank" rel="noopener noreferrer" class="btn btn-industrial mt-4">
-                Ir al Admin
-              </a>
-            </div>
-          )}
+          ))}
         </div>
       </div>
     </section>
@@ -176,15 +165,13 @@ try {
 </Layout>
 
 <script>
-  // Client-side form handling with proper types
   const form = document.getElementById('contact-form');
   
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       
-      const form = e.target as HTMLFormElement;
-      const formData = new FormData(form);
+      const formData = new FormData(e.target as HTMLFormElement);
       const name = formData.get('name') as string;
       const message = formData.get('message') as string;
       
