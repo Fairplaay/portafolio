@@ -1,14 +1,14 @@
 <!-- Visual Editing for Sanity - enable click-to-edit from frontend -->
-{import.meta.env.PUBLIC_SANITY_PROJECT_ID && (
-  <div id="sanity-visual-editing"></div>
-)}
 <script>
 import { visualEditing } from '@sanity/visual-editing';
 
-if (import.meta.env.PUBLIC_SANITY_PROJECT_ID) {
+const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID;
+const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production';
+
+if (projectId) {
   visualEditing({
-    projectId: '{import.meta.env.PUBLIC_SANITY_PROJECT_ID}',
-    dataset: '{import.meta.env.PUBLIC_SANITY_DATASET || 'production'}',
+    projectId: projectId,
+    dataset: dataset,
     overlay: true,
   });
 }
