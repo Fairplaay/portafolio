@@ -1,5 +1,11 @@
 ---
-const navLinks = [
+// Navbar.astro - Best practices: accessibility, typed interfaces
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+const navLinks: NavLink[] = [
   { href: '/', label: 'Inicio' },
   { href: '#showroom', label: 'Showroom' },
   { href: '#proyectos', label: 'Proyectos' },
@@ -7,18 +13,18 @@ const navLinks = [
 ];
 ---
 
-<nav class="navbar bg-steel-800/90 backdrop-blur-md border-b border-steel-600 sticky top-0 z-50">
+<nav class="navbar bg-steel-800/90 backdrop-blur-md border-b border-steel-600 sticky top-0 z-50" role="navigation" aria-label="Navegación principal">
   <div class="container mx-auto">
     <div class="flex-1">
-      <a href="/" class="text-xl font-display font-bold text-accent tracking-wider">
+      <a href="/" class="text-xl font-display font-bold text-accent tracking-wider" aria-label="Ir al inicio">
         JG<span class="text-chrome">.DEV</span>
       </a>
     </div>
     
     <div class="flex-none">
-      <ul class="menu menu-horizontal px-1 gap-2">
-        {navLinks.map(link => (
-          <li>
+      <ul class="menu menu-horizontal px-1 gap-2" role="list">
+        {navLinks.map((link) => (
+          <li role="listitem">
             <a 
               href={link.href} 
               class="text-chrome/80 hover:text-accent hover:bg-steel-700 transition-colors font-medium"

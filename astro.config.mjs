@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import sanity from '@sanity/astro';
 
 export default defineConfig({
-  site: 'https://portafolio-jesusgarcia.pages.dev',
+  site: 'https://jesusgarcia.dev',
   integrations: [
     sitemap({
       changefreq: 'weekly',

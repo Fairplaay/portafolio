@@ -1,4 +1,6 @@
 ---
+// index.astro - Best practices: error handling, typed props, clean imports
+import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
@@ -6,16 +8,39 @@ import ShowroomGrid from '../components/ShowroomGrid.astro';
 
 import { useSanityClient } from '@sanity/astro';
 
-const projects = await useSanityClient().fetch(`*[_type == "project"]|order(order asc)[0...6]{
-  title,
-  slug,
-  description,
-  "image": image.asset->url,
-  tags,
-  demoUrl,
-  githubUrl,
-  order
-}`);
+// Type definitions for better DX
+interface Project {
+  title: string;
+  slug: { current: string };
+  description: string;
+  image: string;
+  tags: string[];
+  demoUrl: string;
+  githubUrl: string;
+  order: number;
+}
+
+// Fetch projects with error handling
+let projects: Project[] = [];
+let error = false;
+
+try {
+  const client = useSanityClient();
+  projects = await client.fetch<Project[]>(`*[_type == "project"]|order(order asc)[0...6]{
+    title,
+    "slug": slug.current,
+    description,
+    "image": image.asset->url,
+    tags,
+    demoUrl,
+    githubUrl,
+    order
+  }`);
+} catch (e) {
+  // Fail gracefully - show placeholder content
+  error = true;
+  console.error('Sanity fetch error:', e);
+}
 ---
 
 <Layout title="Jesus Garcia | Full-Stack Developer & Trading Analyst">
@@ -43,7 +68,7 @@ const projects = await useSanityClient().fetch(`*[_type == "project"]|order(orde
         </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {projects.length > 0 ? projects.map((project: any) => (
+          {projects.length > 0 ? projects.map((project) => (
             <article class="card-industrial group">
               {project.image && (
                 <figure class="aspect-video overflow-hidden">
@@ -51,6 +76,7 @@ const projects = await useSanityClient().fetch(`*[_type == "project"]|order(orde
                     src={project.image} 
                     alt={project.title}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                 </figure>
               )}
@@ -62,7 +88,7 @@ const projects = await useSanityClient().fetch(`*[_type == "project"]|order(orde
                   {project.description}
                 </p>
                 <div class="flex flex-wrap gap-2 mb-4">
-                  {project.tags?.map((tag: string) => (
+                  {project.tags?.map((tag) => (
                     <span class="badge badge-outline border-steel-500 text-chrome/70 text-xs">
                       {tag}
                     </span>
@@ -70,12 +96,12 @@ const projects = await useSanityClient().fetch(`*[_type == "project"]|order(orde
                 </div>
                 <div class="flex gap-3">
                   {project.demoUrl && (
-                    <a href={project.demoUrl} target="_blank" class="btn btn-sm btn-industrial">
+                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-industrial">
                       Demo
                     </a>
                   )}
                   {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" class="btn btn-sm btn-outline border-steel-500 text-chrome hover:bg-steel-700">
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline border-steel-500 text-chrome hover:bg-steel-700">
                       GitHub
                     </a>
                   )}
@@ -84,8 +110,10 @@ const projects = await useSanityClient().fetch(`*[_type == "project"]|order(orde
             </article>
           )) : (
             <div class="col-span-full text-center py-12">
-              <p class="text-chrome/50">Configura Sanity CMS para mostrar proyectos</p>
-              <a href="/admin" class="btn btn-industrial mt-4">
+              <p class="text-chrome/50">
+                {error ? 'Error cargando proyectos. Configura Sanity CMS.' : 'No hay proyectos aún.'}
+              </p>
+              <a href="https://www.sanity.io/manage" target="_blank" rel="noopener noreferrer" class="btn btn-industrial mt-4">
                 Ir al Admin
               </a>
             </div>
@@ -106,12 +134,13 @@ const projects = await useSanityClient().fetch(`*[_type == "project"]|order(orde
         <div class="card-industrial p-8">
           <form class="space-y-4" id="contact-form">
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="name">
                 <span class="text-chrome">Nombre</span>
               </label>
               <input 
                 type="text" 
                 name="name"
+                id="name"
                 placeholder="Tu nombre" 
                 class="input input-bordered bg-steel-700 border-steel-500 text-chrome placeholder:text-chrome/30"
                 required
@@ -119,11 +148,12 @@ const projects = await useSanityClient().fetch(`*[_type == "project"]|order(orde
             </div>
             
             <div class="form-control">
-              <label class="label">
+              <label class="label" for="message">
                 <span class="text-chrome">Mensaje</span>
               </label>
               <textarea 
                 name="message"
+                id="message"
                 placeholder="¿En qué puedo ayudarte?" 
                 class="textarea textarea-bordered bg-steel-700 border-steel-500 text-chrome placeholder:text-chrome/30 h-32"
                 required
@@ -146,16 +176,22 @@ const projects = await useSanityClient().fetch(`*[_type == "project"]|order(orde
 </Layout>
 
 <script>
-  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-    const name = formData.get('name');
-    const message = formData.get('message');
-    
-    const whatsappMessage = encodeURIComponent(`Hola Jesus, soy ${name}. ${message}`);
-    const whatsappUrl = `https://wa.me/584242292287?text=${whatsappMessage}`;
-    
-    window.open(whatsappUrl, '_blank');
-  });
+  // Client-side form handling with proper types
+  const form = document.getElementById('contact-form');
+  
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const name = formData.get('name') as string;
+      const message = formData.get('message') as string;
+      
+      const whatsappMessage = encodeURIComponent(`Hola Jesus, soy ${name}. ${message}`);
+      const whatsappUrl = `https://wa.me/584242292287?text=${whatsappMessage}`;
+      
+      window.open(whatsappUrl, '_blank');
+    });
+  }
 </script>

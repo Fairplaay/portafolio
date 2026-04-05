@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jesusgarcia.dev/sitemap-index.xml
