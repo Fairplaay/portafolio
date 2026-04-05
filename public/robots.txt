@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jesusgarcia.dev/sitemap-index.xml
+Sitemap: https://fairplaay-portafolio.pages.dev/sitemap-index.xml

@@ -1,184 +1,159 @@
 ---
-// index.astro - Best practices: error handling, typed props, clean imports
+// Import Client and Components
+import { sanityClient } from '../lib/sanity';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
-import ShowroomGrid from '../components/ShowroomGrid.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 
-// Static project data (replace with Sanity CMS later)
-const projects = [
-  {
-    title: 'Sistema de Trading',
-    slug: 'trading-system',
-    description: 'Sistema automatizado de trading para XAU/USD con señales en tiempo real',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a0?w=800&auto=format&fit=crop',
-    tags: ['Vue.js', 'Node.js', 'MongoDB'],
-    demoUrl: '#',
-    githubUrl: 'https://github.com/Fairplaay/xau-trading-strategies',
-    order: 1,
-  },
-  {
-    title: 'Analytics Deportivo',
-    slug: 'sports-analytics',
-    description: 'Plataforma de análisis para MLB, NBA y NHL con datos en tiempo real',
-    image: 'https://images.unsplash.com/photo-1569517282132-2742a3616a0c?w=800&auto=format&fit=crop',
-    tags: ['Vue.js', 'API', 'ESPN'],
-    demoUrl: '#',
-    githubUrl: 'https://github.com/Fairplaay/bot_sport_scrapping',
-    order: 2,
-  },
-  {
-    title: 'Portafolio Personal',
-    slug: 'portfolio',
-    description: 'Portafolio profesional con diseño industrial moderno',
-    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&auto=format&fit=crop',
-    tags: ['Astro', 'Tailwind', ' DaisyUI'],
-    demoUrl: '#',
-    githubUrl: 'https://github.com/Fairplaay/portafolio',
-    order: 3,
-  },
+// Fetch data from Sanity (static fallback if not configured)
+let bio = null;
+let experiencia = [];
+let proyectos = [];
+let productos = [];
+
+try {
+  if (import.meta.env.PUBLIC_SANITY_PROJECT_ID) {
+    bio = await sanityClient.fetch('*[_type == "bio"][0]');
+    experiencia = await sanityClient.fetch('*[_type == "experiencia"] | order(fechaInicio desc)');
+    proyectos = await sanityClient.fetch('*[_type == "proyecto"] | order(fecha desc)');
+    productos = await sanityClient.fetch('*[_type == "producto" && disponible == true]');
+  }
+} catch (e) {
+  console.log('Sanity not configured, using static data');
+}
+
+// Static fallback data
+const staticBio = {
+  nombre: 'Jesus Garcia',
+  titulo: 'Full-Stack Developer',
+  perfil: 'Desarrollador Full-Stack especializado en Vue, Node.js, MongoDB y soluciones digitales. "Cualquiera puede hablar. Enséñame el código" - Linus Torvalds',
+  ubicacion: 'Estado Lara, Venezuela',
+  skills: ['Vue.js', 'Node.js', 'MongoDB', 'React', 'Express', 'Docker', 'JavaScript'],
+};
+
+const staticExperiencia = [
+  { empresa: 'Devscola', cargo: 'Desarrollador Full-Stack', descripcion: 'Desarrollo de soluciones web completas', fechaInicio: '2023-01-01' },
 ];
+
+const staticProyectos = [
+  { titulo: 'MERN Store', descripcion: 'E-commerce con React, Redux, MongoDB, Express y Docker', techStack: ['React', 'Redux', 'MongoDB', 'Express', 'Docker'], linkGithub: 'https://github.com/Fairplaay/mern_store' },
+];
+
+const staticProductos = [
+  { nombre: 'Desarrollo Web', sku: 'WEB-001', descripcion: 'Sitios web modernos y responsivos', precio: 500, categoria: 'web' },
+  { nombre: 'E-commerce', sku: 'ECOM-001', descripcion: 'Tiendas online con pasarela de pagos', precio: 800, categoria: 'ecommerce' },
+  { nombre: 'API REST', sku: 'API-001', descripcion: 'APIs RESTful escalables', precio: 400, categoria: 'api' },
+];
+
+// Use Sanity data or fallback
+const displayBio = bio || staticBio;
+const displayExperiencia = experiencia.length ? experiencia : staticExperiencia;
+const displayProyectos = proyectos.length ? proyectos : staticProyectos;
+const displayProductos = productos.length ? productos : staticProductos;
 ---
 
-<Layout title="Jesus Garcia | Full-Stack Developer & Trading Analyst">
+<Layout title={`${staticBio.nombre} - ${staticBio.titulo}`} description={staticBio.perfil}>
   <Navbar />
   
-  <main>
-    <Hero />
-    
-    <section id="showroom" class="py-20 bg-steel-900">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-display font-bold text-center mb-4 text-chrome">
-          SHOWROOM <span class="text-accent">DIGITAL</span>
-        </h2>
-        <p class="text-center text-chrome/60 mb-12 max-w-2xl mx-auto">
-          Productos y soluciones comerciales desarrolladas con tecnología de punta
-        </p>
-        <ShowroomGrid />
-      </div>
-    </section>
-    
-    <section id="proyectos" class="py-20 bg-steel-800">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-display font-bold text-center mb-4 text-chrome">
-          PROYECTOS <span class="text-accent">TECH</span>
-        </h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {projects.map((project) => (
-            <article class="card-industrial group">
-              {project.image && (
-                <figure class="aspect-video overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </figure>
-              )}
-              <div class="p-6">
-                <h3 class="text-xl font-display font-semibold text-chrome mb-2">
-                  {project.title}
-                </h3>
-                <p class="text-chrome/70 text-sm mb-4 line-clamp-3">
-                  {project.description}
-                </p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span class="badge badge-outline border-steel-500 text-chrome/70 text-xs">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div class="flex gap-3">
-                  {project.demoUrl && (
-                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-industrial">
-                      Demo
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline border-steel-500 text-chrome hover:bg-steel-700">
-                      GitHub
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
+  <!-- Hero Section -->
+  <section id="bio" class="hero min-h-[60vh] bg-base-200">
+    <div class="hero-content text-center">
+      <div class="max-w-2xl">
+        <h1 class="text-5xl font-bold text-primary mb-4">{displayBio.nombre}</h1>
+        <p class="text-xl text-base-content-secondary mb-2">{displayBio.titulo}</p>
+        <p class="text-lg mb-6">{displayBio.perfil}</p>
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+          {displayBio.skills?.map((skill) => (
+            <span class="badge badge-primary badge-outline">{skill}</span>
           ))}
         </div>
-      </div>
-    </section>
-    
-    <section id="contacto" class="py-20 bg-steel-900">
-      <div class="container mx-auto px-4 max-w-2xl">
-        <h2 class="text-4xl font-display font-bold text-center mb-4 text-chrome">
-          CONTACTO <span class="text-accent">DIRECTO</span>
-        </h2>
-        <p class="text-center text-chrome/60 mb-8">
-          ¿Tienes un proyecto? Hablemos por WhatsApp
-        </p>
-        
-        <div class="card-industrial p-8">
-          <form class="space-y-4" id="contact-form">
-            <div class="form-control">
-              <label class="label" for="name">
-                <span class="text-chrome">Nombre</span>
-              </label>
-              <input 
-                type="text" 
-                name="name"
-                id="name"
-                placeholder="Tu nombre" 
-                class="input input-bordered bg-steel-700 border-steel-500 text-chrome placeholder:text-chrome/30"
-                required
-              />
-            </div>
-            
-            <div class="form-control">
-              <label class="label" for="message">
-                <span class="text-chrome">Mensaje</span>
-              </label>
-              <textarea 
-                name="message"
-                id="message"
-                placeholder="¿En qué puedo ayudarte?" 
-                class="textarea textarea-bordered bg-steel-700 border-steel-500 text-chrome placeholder:text-chrome/30 h-32"
-                required
-              ></textarea>
-            </div>
-            
-            <button 
-              type="submit" 
-              class="btn w-full bg-accent text-steel-900 hover:bg-accent-hover border-none font-semibold"
-            >
-              Enviar por WhatsApp
-            </button>
-          </form>
+        <div class="flex gap-2 justify-center">
+          <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+          <WhatsAppFloat />
         </div>
       </div>
-    </section>
-  </main>
-  
-  <Footer />
-</Layout>
+    </div>
+  </section>
 
-<script>
-  const form = document.getElementById('contact-form');
-  
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const formData = new FormData(e.target as HTMLFormElement);
-      const name = formData.get('name') as string;
-      const message = formData.get('message') as string;
-      
-      const whatsappMessage = encodeURIComponent(`Hola Jesus, soy ${name}. ${message}`);
-      const whatsappUrl = `https://wa.me/584242292287?text=${whatsappMessage}`;
-      
-      window.open(whatsappUrl, '_blank');
-    });
-  }
-</script>
+  <!-- Experiencia Section -->
+  <section id="experiencia" class="py-16 container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8 text-center">Experiencia</h2>
+    <div class="timeline timeline-vertical lg:timeline-horizontal mx-auto max-w-4xl">
+      {displayExperiencia.map((exp) => (
+        <div class="timeline-box bg-base-200 p-4 rounded-lg">
+          <div class="font-bold text-primary">{exp.empresa}</div>
+          <div class="text-sm">{exp.cargo}</div>
+          <p class="text-sm text-base-content-secondary">{exp.descripcion}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Proyectos Section -->
+  <section id="proyectos" class="py-16 bg-base-200">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Proyectos</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {displayProyectos.map((proj) => (
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title text-primary">{proj.titulo}</h3>
+              <p>{proj.descripcion}</p>
+              <div class="flex flex-wrap gap-1 my-2">
+                {proj.techStack?.map((tech) => (
+                  <span class="badge badge-outline badge-sm">{tech}</span>
+                ))}
+              </div>
+              <div class="card-actions justify-end mt-4">
+                {proj.linkGithub && (
+                  <a href={proj.linkGithub} target="_blank" rel="noopener" class="btn btn-sm btn-outline">GitHub</a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Showroom Demo Section -->
+  <section id="showroom" class="py-16 container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-4 text-center">Showroom Demo</h2>
+    <p class="text-center text-base-content-secondary mb-8">
+     -demo gratuita para futuros clientes
+    </p>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {displayProductos.map((prod) => (
+        <div class="card bg-base-200 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">{prod.nombre}</h3>
+            <p class="text-sm text-base-content-secondary">SKU: {prod.sku}</p>
+            <p>{prod.descripcion}</p>
+            <div class="text-2xl font-bold text-primary mt-2">
+              ${prod.precio}
+            </div>
+            <div class="card-actions justify-end mt-4">
+              <a href={`#contactar?producto=${prod.nombre}`} class="btn btn-primary btn-sm">
+                Solicitar
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer footer-center p-10 bg-base-200 text-base-content">
+    <div>
+      <p class="text-sm text-base-content-secondary">
+        © 2026 {displayBio.nombre} - Full-Stack Developer
+      </p>
+      <p class="text-xs text-base-content-secondary">
+        Venezuela · {displayBio.ubicacion}
+      </p>
+    </div>
+  </footer>
+
+  <WhatsAppFloat position="bottom-left" />
+</Layout>
