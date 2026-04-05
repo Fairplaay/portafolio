@@ -24,9 +24,4 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
-  vite: {
-    ssr: {
-      noExternal: ['daisyui'],
-    },
-  },
 });
