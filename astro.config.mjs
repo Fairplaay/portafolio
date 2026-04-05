@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import { sanityIntegration } from '@sanity/astro';
+
+const sanity = (await import('@sanity/astro')).default;
 
 export default defineConfig({
   site: 'https://jesusgarcia.dev',
@@ -12,7 +13,7 @@ export default defineConfig({
       lastmod: new Date(),
     }),
     tailwind(),
-    sanityIntegration({
+    sanity({
       projectId: process.env.PUBLIC_SANITY_PROJECT_ID || '',
       dataset: process.env.PUBLIC_SANITY_DATASET || 'production',
       useCdn: true,
