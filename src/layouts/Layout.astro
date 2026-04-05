@@ -1,13 +1,20 @@
 ---
+// Layout.astro - Best practices: SEO, accessibility, performance
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  canonical?: string;
 }
 
 const { 
   title, 
-  description = "Portafolio profesional de Jesus Garcia - Full-Stack Developer & Trading Analyst" 
+  description = "Portafolio profesional de Jesus Garcia - Full-Stack Developer & Trading Analyst",
+  image = "/og-image.png",
+  canonical = Astro.url.href
 } = Astro.props;
+
+const siteUrl = "https://jesusgarcia.dev";
 ---
 
 <!DOCTYPE html>
@@ -15,28 +22,38 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+  
+  <!-- SEO -->
   <meta name="description" content={description} />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={canonical} />
   
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content={Astro.url} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={`${siteUrl}${image}`} />
+  <meta property="og:site_name" content="Jesus Garcia Portfolio" />
   
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${siteUrl}${image}`} />
   
-  <title>{title}</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   
-  <!-- Preload fonts -->
+  <!-- Preload fonts for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <title>{title}</title>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-steel-950 text-chrome antialiased">
   <slot />
 </body>
 </html>

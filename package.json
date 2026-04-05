@@ -2,17 +2,23 @@
   "name": "portafolio-jesus-garcia",
   "type": "module",
   "version": "1.0.0",
+  "description": "Portafolio profesionales de Jesus Garcia - Full-Stack Developer",
+  "author": "Jesus Garcia <jesus@jesusgarcia.dev>",
+  "license": "MIT",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint .",
-    "format": "prettier --write ."
+    "lint": "eslint . --fix",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "astro": "^6.0.0",
     "@astrojs/tailwind": "^6.0.0",
+    "@astrojs/sitemap": "^2.0.0",
     "tailwindcss": "^4.0.0",
     "@tailwindcss/vite": "^4.0.0",
     "daisyui": "^5.0.0",
@@ -22,10 +28,16 @@
     "groq": "^3.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "eslint": "^9.0.0",
     "@eslint/js": "^9.0.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.0.0",
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.14.0",
     "wrangler": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.14.1"
   }
 }

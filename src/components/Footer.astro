@@ -1,0 +1,112 @@
+---
+// Footer component - Best practices: explicit types, clean structure
+interface SocialLink {
+  href: string;
+  label: string;
+  icon: string;
+}
+
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+const currentYear = new Date().getFullYear();
+
+const socialLinks: SocialLink[] = [
+  { 
+    href: 'https://github.com/fairplaay', 
+    label: 'GitHub', 
+    icon: 'M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 2.834c.209.005.42.032.615.044 1.745-.94 2.902-.898 3.302-.898 2.652 0 4.507 1.052 4.507 4.195 0 3.764-1.801 5.625-5.495 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.207-6.086 8.207-11.386C21.627 5.373 16.627 0 12 0z'
+  },
+  { 
+    href: 'https://linkedin.com/in/jesusgarcia-dev', 
+    label: 'LinkedIn', 
+    icon: 'M20.447 0H3.553A3.553 0 000 .553v19.894C0 21.324.476 22 1.553 22h18.894C21.524 22 22 21.324 22 .553V.553A3.553 0 0020.447 0zM7.33 20.064h3.557v-9.24H7.33v9.24zM5.385 7.678a2.077 2.077 0 11-.001-4.143 2.077 2.077 0 01.001 4.143zM17.562 20.064h3.557v-5.297c0-2.095-1.752-3.792-3.875-3.792-1.18 0-2.227.79-2.227 2.227v5.862h3.557v-6.586c0-.345-.035-.69-.168-1.035-.372-.967-1.204-1.967-2.46-1.967-1.707 0-2.447 1.022-2.447 2.447v6.938h3.557v-9.24h3.557z'
+  },
+  { 
+    href: 'https://twitter.com/fairplaay', 
+    label: 'Twitter', 
+    icon: 'M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.955-3.297 1.17a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.883 4.883 0 01-.674-3.507c0-1.415.738-2.67 1.86-3.494a4.91 4.91 0 001.535 3.6 4.806 4.806 0 01-2.223-.597c-.042.585-.108 1.18-.163 1.78a4.996 4.996 0 003.94 4.65 4.91 4.91 0 01-2.212.085 4.945 4.945 0 004.624 3.42 9.91 9.91 0 01-6.085 2.1l-.157-.01z'
+  },
+];
+
+const navLinks: NavLink[] = [
+  { href: '/', label: 'Inicio' },
+  { href: '#showroom', label: 'Showroom' },
+  { href: '#proyectos', label: 'Proyectos' },
+  { href: '#contacto', label: 'Contacto' },
+];
+
+const contactEmail = 'jesus@jesusgarcia.dev';
+---
+
+<footer class="footer bg-steel-900 border-t border-steel-700">
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Brand -->
+      <div class="flex flex-col gap-4">
+        <a href="/" class="text-2xl font-display font-bold text-accent tracking-wider">
+          JG<span class="text-chrome">.DEV</span>
+        </a>
+        <p class="text-chrome/60 text-sm leading-relaxed max-w-xs">
+          Desarrollador fullstack especializado en Vue.js, Node.js y soluciones cloud computing.
+          Creando experiencias digitales modernas y performant.
+        </p>
+        <div class="flex gap-3">
+          {socialLinks.map((social) => (
+            <a 
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-sm btn-ghost btn-square text-chrome/60 hover:text-accent hover:bg-steel-800"
+              aria-label={social.label}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 fill-current">
+                <path d={social.icon} />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-chrome font-semibold tracking-wide">Enlaces</h3>
+        <ul class="flex flex-col gap-2">
+          {navLinks.map((link) => (
+            <li>
+              <a 
+                href={link.href} 
+                class="text-chrome/60 hover:text-accent transition-colors text-sm"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-chrome font-semibold tracking-wide">Contacto</h3>
+        <p class="text-chrome/60 text-sm">
+          ¿Tienes un proyecto en mente? Hablemos.
+        </p>
+        <a 
+          href={`mailto:${contactEmail}`}
+          class="btn btn-sm bg-accent text-steel-900 hover:bg-accent-hover border-none font-semibold w-fit"
+        >
+          Contactar
+        </a>
+      </div>
+    </div>
+
+    <div class="divider border-steel-700 my-8"></div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-chrome/40 text-sm">
+      <p>© {currentYear} Jesús García. Todos los derechos reservados.</p>
+      <p>Construido con <a href="https://astro.build" class="hover:text-accent">Astro</a> + <a href="https://tailwindcss.com" class="hover:text-accent">Tailwind</a></p>
+    </div>
+  </div>
+</footer>
