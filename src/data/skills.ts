@@ -3,9 +3,11 @@ import type { ImageMetadata } from 'astro';
 
 import Typescript from '@/assets/icons/typescript.svg';
 import React from '@/assets/icons/reactjs.svg';
-import Node from '@/assets/icons/typescript.svg'; // reusing - no node icon
+import Php from '@/assets/icons/php.svg';
 import Astro from '@/assets/icons/astro.svg';
+import Tailwind from '@/assets/icons/tailwind.svg';
 import Python from '@/assets/icons/python.svg';
+import Next from '@/assets/icons/next.svg';
 
 type Skill = {
   name: string;
@@ -14,16 +16,12 @@ type Skill = {
 
 export const skills = [
   {
-    name: 'TypeScript',
+    name: 'Typescript',
     icon: Typescript,
   },
   {
     name: 'React',
     icon: React,
-  },
-  {
-    name: 'Node.js',
-    icon: Node,
   },
   {
     name: 'Astro',
