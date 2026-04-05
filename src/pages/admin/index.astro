@@ -1,7 +1,6 @@
 ---
-// Sanity Studio - Embedded or Redirect
+// Sanity Studio - Local Development
 const projectId = 'ix45pdgt';
-const dataset = 'production';
 ---
 
 <!doctype html>
@@ -9,7 +8,7 @@ const dataset = 'production';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - Sanity Studio</title>
+    <title>Admin - Jesus Garcia Portfolio</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- Fonts -->
@@ -24,42 +23,89 @@ const dataset = 'production';
         background: #f8fafc;
         min-height: 100vh;
       }
-      .studio-loader {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        gap: 1rem;
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
       }
-      .spinner {
-        width: 40px;
-        height: 40px;
-        border: 3px solid #e2e8f0;
-        border-top-color: #1E3A8A;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+      h1 { color: #1E3A8A; margin-bottom: 1rem; }
+      .card {
+        background: white;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
       }
-      @keyframes spin {
-        to { transform: rotate(360deg); }
+      .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: #1E3A8A;
+        color: white;
+        text-decoration: none;
+        border-radius: 0.375rem;
+        font-weight: 500;
+      }
+      .btn:hover { background: #15244d; }
+      .btn-outline {
+        background: transparent;
+        border: 1px solid #1E3A8A;
+        color: #1E3A8A;
+      }
+      .code {
+        background: #111827;
+        color: #10B981;
+        padding: 1rem;
+        border-radius: 0.375rem;
+        font-family: monospace;
+        overflow-x: auto;
+      }
+      .warning {
+        background: #FEF3C7;
+        border-left: 4px solid #F59E0B;
+        padding: 1rem;
+        margin: 1rem 0;
       }
     </style>
   </head>
   <body>
-    <div class="studio-loader">
-      <div class="spinner"></div>
-      <p>Cargando Sanity Studio...</p>
-    </div>
-    
-    <!-- Sanity Studio via CDN -->
-    <script>
-      // Check if we should use embedded or redirect
-      const useEmbedded = true;
+    <div class="container">
+      <h1>⚙️ Admin - Portafolio Jesus Garcia</h1>
       
-      if (useEmbedded) {
-        // Redirect to Sanity Studio managed
-        window.location.href = 'https://www.sanity.io/manage/ix45pdgt';
-      }
-    </script>
+      <div class="card">
+        <h2>Sanity Studio</h2>
+        <p>Para editar el contenido de tu portafolio:</p>
+        
+        <div class="warning">
+          <strong>⚠️ Importante:</strong> En local necesitas ejecutar Sanity Studio separately.
+        </div>
+        
+        <h3>En tu terminal:</h3>
+        <div class="code">cd sanity && sanity dev</div>
+        
+        <p style="margin-top: 1rem">Luego abre: <strong>http://localhost:3333</strong></p>
+      </div>
+      
+      <div class="card">
+        <h2>Configuración</h2>
+        <ul>
+          <li><strong>Project ID:</strong> ix45pdgt</li>
+          <li><strong>Dataset:</strong> production</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h2>Editar contenid</h2>
+        <p>Edita estos documentos desde Sanity Studio:</p>
+        <ul>
+          <li><strong>Bio</strong> - Tu información de perfil</li>
+          <li><strong>Experiencia</strong> - Trayectoria laboral</li>
+          <li><strong>Educacion</strong> - Formación académica</li>
+          <li><strong>Proyecto</strong> - Proyectos del portafolio</li>
+          <li><strong>Producto</strong> - Productos del Showroom</li>
+        </ul>
+      </div>
+      
+      <a href="/" class="btn">← Volver al Portafolio</a>
+    </div>
   </body>
 </html>
