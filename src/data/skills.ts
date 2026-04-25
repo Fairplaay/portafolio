@@ -1,34 +1,71 @@
 import type { SvgComponent } from 'astro/types';
 import type { ImageMetadata } from 'astro';
 
-import Typescript from '@/assets/icons/typescript.svg';
-import React from '@/assets/icons/reactjs.svg';
-import Php from '@/assets/icons/php.svg';
-import Astro from '@/assets/icons/astro.svg';
-import Tailwind from '@/assets/icons/tailwind.svg';
-import Python from '@/assets/icons/python.svg';
-import Next from '@/assets/icons/next.svg';
+import Typescript from '../assets/icons/typescript.svg';
+import React from '../assets/icons/reactjs.svg';
+import Vue from '../assets/icons/vue.svg';
+import Node from '../assets/icons/nodejs.svg';
+import Docker from '../assets/icons/docker.svg';
+import MongoDB from '../assets/icons/mongodb.svg';
+import Express from '../assets/icons/express.svg';
+import JavaScript from '../assets/icons/javascript.svg';
 
 type Skill = {
   name: string;
   icon: SvgComponent & ImageMetadata 
 }
 
-export const skills = [
+export const skills: Skill[] = [
   {
-    name: 'Typescript',
+    name: 'JavaScript',
+    icon: JavaScript,
+  },
+  {
+    name: 'TypeScript',
     icon: Typescript,
+  },
+  {
+    name: 'Vue.js',
+    icon: Vue,
   },
   {
     name: 'React',
     icon: React,
   },
   {
-    name: 'Astro',
-    icon: Astro,
+    name: 'Node.js',
+    icon: Node,
   },
   {
-    name: 'Python',
-    icon: Python,
+    name: 'Express',
+    icon: Express,
   },
-] as Skill[];
+  {
+    name: 'MongoDB',
+    icon: MongoDB,
+  },
+  {
+    name: 'Docker',
+    icon: Docker,
+  },
+  {
+    name: 'Vue Router',
+    icon: Vue,
+  },
+  {
+    name: 'Vuex',
+    icon: Vue,
+  },
+  {
+    name: 'Redux',
+    icon: React,
+  },
+  {
+    name: 'ESLint',
+    icon: JavaScript,
+  },
+  {
+    name: 'Prettier',
+    icon: JavaScript,
+  },
+];

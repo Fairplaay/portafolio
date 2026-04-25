@@ -6,8 +6,18 @@ import { skills } from '../../data/skills';
   <h2>Skills</h2>
   <div class="carousel-container">
     <ul class="skills-list">
-      {skills.map((skill) => <li>{<skill.icon width={64} height={64} />}</li>)}
-      {skills.map((skill) => <li>{<skill.icon width={64} height={64} />}</li>)}
+      {skills.map((skill) => (
+        <li class="skill-item" title={skill.name}>
+          <skill.icon width={48} height={48} />
+          <span class="skill-name">{skill.name}</span>
+        </li>
+      ))}
+      {skills.map((skill) => (
+        <li class="skill-item" title={skill.name} aria-hidden="true">
+          <skill.icon width={48} height={48} />
+          <span class="skill-name">{skill.name}</span>
+        </li>
+      ))}
     </ul>
   </div>
 </section>
@@ -15,6 +25,7 @@ import { skills } from '../../data/skills';
 <style>
   #skills {
     width: 100%;
+    padding: 2rem 0;
   }
   .carousel-container {
     width: 100%;
@@ -22,31 +33,74 @@ import { skills } from '../../data/skills';
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
-      black 15%,
-      black 85%,
+      black 10%,
+      black 90%,
       transparent 100%
     );
-    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-    .skills-list {
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 3px;
+    }
+  }
+  .skills-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0 1rem;
+    animation: carousel 20s linear infinite forwards;
+    .skill-item {
       display: flex;
-      flex-wrap: nowrap;
-      gap: 2rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      animation: carousel 10s linear infinite forwards;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      transition: transform 0.3s ease, background 0.3s ease;
+      min-width: 100px;
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.05);
+      }
+      .skill-name {
+        font-size: 0.8rem;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+    }
+  }
 
-      li {
-        color: #fff;
-        border-radius: 5px;
-        font-size: 0.9em;
-        transition:
-          transform 0.2s,
-          color 0.2s;
-
-        &:hover {
-          color: var(--primary-color);
-          transform: scale(1.1);
+  @media (max-width: 768px) {
+    .carousel-container {
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    }
+    .skills-list {
+      gap: 1rem;
+      animation-duration: 15s;
+      .skill-item {
+        padding: 0.75rem;
+        min-width: 80px;
+        .skill-name {
+          font-size: 0.7rem;
         }
       }
     }
@@ -57,7 +111,7 @@ import { skills } from '../../data/skills';
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-20rem);
+      transform: translateX(-50%);
     }
   }
 </style>
