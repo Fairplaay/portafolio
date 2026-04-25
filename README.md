@@ -1,4 +1,4 @@
-# Astro Portfolio Template
+# Astro Portfolio
 
 Template de portafolio personal construido con Astro, diseñado para ser fácil de personalizar y desplegar.
 
