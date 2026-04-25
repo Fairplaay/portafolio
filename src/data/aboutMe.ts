@@ -15,7 +15,7 @@ export const aboutMe = {
   skills: ['Vue.js', 'Vue Router', 'Vuex', 'React', 'Redux', 'Node.js', 'Express', 'MongoDB', 'Docker', 'JavaScript', 'TypeScript', 'ESLint', 'Prettier'],
   hobbies: ['Creatividad', 'Código limpio', 'Documentación', 'Trabajo en equipo', 'Aprendizaje continuo'],
   profile: {
-    picture: '/profile.jpg',
+    picture: '/profile.jpeg',
     altText: "Foto de perfil de Jesus Garcia",
   },
   banner: {
