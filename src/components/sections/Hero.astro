@@ -1,9 +1,10 @@
 ---
-import { aboutMe } from '../../data/aboutMe';
+import { aboutMe } from '../../data/content';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const aboutData = aboutMe[lang];
 const cvDownloadUrl = lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf';
 ---
 
@@ -11,8 +12,8 @@ const cvDownloadUrl = lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf';
   <header class="hero-header">
     <picture class="hero-banner">
       <img
-        src={aboutMe.banner.image}
-        alt={aboutMe.banner.altText}
+        src={aboutData.banner.image}
+        alt={aboutData.banner.altText}
         loading="lazy"
         width="750"
         height="150"
@@ -20,13 +21,13 @@ const cvDownloadUrl = lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf';
     </picture>
   </header>
   <picture class="hero-logo">
-    <img src={aboutMe.profile.picture} alt={aboutMe.profile.altText} width="200" height="200" />
+    <img src={aboutData.profile.picture} alt={aboutData.profile.altText} width="200" height="200" />
   </picture>
   <div class="hero-content">
-    <h1>{aboutMe.name}</h1>
-    <p>{aboutMe.description}</p>
+    <h1>{aboutData.name}</h1>
+    <p>{aboutData.description}</p>
     <div class="hero-buttons">
-      <a href={`mailto:${aboutMe.contact.email}`} class="btn-primary">{t('hero.contact')}</a>
+      <a href={`mailto:${aboutData.contact.email}`} class="btn-primary">{t('hero.contact')}</a>
       <a href={cvDownloadUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary">{t('hero.downloadCV')}</a>
     </div>
   </div>

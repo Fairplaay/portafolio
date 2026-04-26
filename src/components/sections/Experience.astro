@@ -1,5 +1,5 @@
 ---
-import { experience } from '../../data/experience';
+import { experience } from '../../data/content';
 import ExperienceCard, { type ExperienceItem } from '../Experience/ExperienceCard.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
@@ -11,11 +11,14 @@ const t = useTranslations(lang);
   <h2>{t('experience.title')}</h2>
   <ul class="timeline">
     {
-      experience.map((experience: ExperienceItem) => (
-        <li class="timeline-item">
-          <ExperienceCard {...experience} />
-        </li>
-      ))
+      experience.map((exp: any) => {
+        const experienceItem: ExperienceItem = exp[lang];
+        return (
+          <li class="timeline-item">
+            <ExperienceCard {...experienceItem} />
+          </li>
+        );
+      })
     }
   </ul>
 </section>

@@ -1,15 +1,11 @@
 ---
 import { socialMediaIcons } from '../../assets/social/util';
-import { aboutMe } from '../../data/aboutMe';
+import { aboutMe } from '../../data/content';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const isEs = lang === 'es';
-
-const hobbiesList = isEs 
-  ? ['Creatividad', 'Código limpio', 'Documentación', 'Trabajo en equipo', 'Aprendizaje continuo'] 
-  : ['Creativity', 'Clean Code', 'Documentation', 'Teamwork', 'Continuous Learning'];
+const aboutData = aboutMe[lang];
 ---
 
 <section id="about">
@@ -18,8 +14,8 @@ const hobbiesList = isEs
     <div class="about-profile">
       <picture>
         <img
-          src={aboutMe.profile.picture}
-          alt={aboutMe.profile.altText}
+          src={aboutData.profile.picture}
+          alt={aboutData.profile.altText}
           loading="lazy"
           width="200"
           height="200"
@@ -27,7 +23,7 @@ const hobbiesList = isEs
       </picture>
       <div class="social-media">
         {
-          Object.entries(aboutMe.socialMedia).map(([key, value]) => {
+          Object.entries(aboutData.socialMedia).map(([key, value]) => {
             const IconComponent = socialMediaIcons[key as keyof typeof socialMediaIcons];
 
             return (
@@ -40,15 +36,15 @@ const hobbiesList = isEs
         }
       </div>
     </div>
-    <div class="about-content">
-      <h3>{aboutMe.name}</h3>
-      <p>{t('about.bio1')}</p>
-      <p>{t('about.bio2')}</p>
-      <p>{t('about.bio3')}</p>
-      <div class="hobbies">
-        {hobbiesList.map((hobby) => (
-          <span class="hobby-tag">{hobby}</span>
-        ))}
+     <div class="about-content">
+       <h3>{aboutData.name}</h3>
+       <p>{t('about.bio1')}</p>
+       <p>{t('about.bio2')}</p>
+       <p>{t('about.bio3')}</p>
+       <div class="hobbies">
+         {aboutData.hobbies.map((hobby) => (
+           <span class="hobby-tag">{hobby}</span>
+         ))}
       </div>
     </div>
   </article>

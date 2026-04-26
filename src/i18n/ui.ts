@@ -22,6 +22,9 @@ export const ui = {
     'about.bio2': 'He trabajado en aplicaciones para sectores como salud, finanzas y logística, creando interfaces intuitivas y sistemas escalables.',
     'about.bio3': 'Venezolano radicado en Barquisimeto, disponible para trabajo remoto, presential o reubicación.',
     'about.hobbies': 'Intereses',
+    'about.education': 'Educación',
+    'about.certifications': 'Certificaciones',
+    'about.languages': 'Idiomas',
     'experience.at': 'en',
   },
   en: {
@@ -40,6 +43,9 @@ export const ui = {
     'about.bio2': 'I have worked on applications for health, finance, and logistics sectors, creating intuitive interfaces and scalable systems.',
     'about.bio3': 'Venezuelan based in Barquisimeto, available for remote, on-site work or relocation.',
     'about.hobbies': 'Interests',
+    'about.education': 'Education',
+    'about.certifications': 'Certifications',
+    'about.languages': 'Languages',
     'experience.at': 'at',
   },
 } as const;

@@ -1,15 +1,16 @@
 ---
-import { aboutMe } from '../../data/aboutMe';
+import { aboutMe } from '../../data/content';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const aboutData = aboutMe[lang];
 ---
 
 <section id="skills">
   <h2>{t('skills.title')}</h2>
   <div class="skills-grid">
-    {aboutMe.skills.map((skill) => (
+    {aboutData.skills.map((skill) => (
       <div class="skill-card">
         <span>{skill}</span>
       </div>

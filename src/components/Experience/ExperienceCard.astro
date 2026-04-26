@@ -5,28 +5,24 @@ export interface ExperienceItem {
   position: string;
   company: string;
   duration: string;
+  location: string;
   responsibilities: string[];
-  positionEs: string;
-  responsibilitiesEs: string[];
 }
 
 interface Props extends ExperienceItem {}
 
-const { position, company, duration, responsibilities, positionEs, responsibilitiesEs } = Astro.props;
+const { position, company, duration, location, responsibilities } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-const displayPosition = lang === 'en' ? position : positionEs;
-const displayResponsibilities = lang === 'en' ? responsibilities : responsibilitiesEs;
 ---
 
 <h3>
-  {displayPosition} {t('experience.at')} {company}
+  {position} {t('experience.at')} {company}
 </h3>
-<span class="timeline-date">{duration}</span>
+<span class="timeline-date">{duration} - {location}</span>
 <div>
   {
-    displayResponsibilities.map((p) => {
+    responsibilities.map((p) => {
       return <p>{p}</p>;
     })
   }
