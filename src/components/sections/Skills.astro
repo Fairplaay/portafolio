@@ -1,9 +1,13 @@
 ---
 import { aboutMe } from '../../data/aboutMe';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="skills">
-  <h2>Habilidades</h2>
+  <h2>{t('skills.title')}</h2>
   <div class="skills-grid">
     {aboutMe.skills.map((skill) => (
       <div class="skill-card">
@@ -19,7 +23,6 @@ import { aboutMe } from '../../data/aboutMe';
     padding: 20px;
     h2 {
       text-align: center;
-      margin-bottom: 2rem;
     }
     .skills-grid {
       display: flex;

@@ -1,0 +1,43 @@
+export const languages = {
+  es: 'Español',
+  en: 'English',
+} as const;
+
+export const defaultLang = 'es';
+
+export const ui = {
+  es: {
+    'nav.home': 'Inicio',
+    'nav.about': 'Acerca de',
+    'hero.contact': 'Contáctame',
+    'hero.downloadCV': 'Descargar CV',
+    'hero.whatsapp': 'WhatsApp',
+    'hero.linkedIn': 'LinkedIn',
+    'hero.github': 'GitHub',
+    'about.title': 'Acerca de Mí',
+    'experience.title': 'Experiencia',
+    'skills.title': 'Habilidades',
+    'connect.title': 'Contactame',
+    'about.bio1': 'Desarrollador Frontend con 7+ años de experiencia especializado en Vue.js y React.',
+    'about.bio2': 'He trabajado en aplicaciones para sectores como salud, finanzas y logística, creando interfaces intuitivas y sistemas escalables.',
+    'about.bio3': 'Venezolano radicado en Barquisimeto, disponible para trabajo remoto, presential o reubicación.',
+    'experience.at': 'en',
+  },
+  en: {
+    'nav.home': 'Home',
+    'nav.about': 'About',
+    'hero.contact': 'Contact Me',
+    'hero.downloadCV': 'Download CV',
+    'hero.whatsapp': 'WhatsApp',
+    'hero.linkedIn': 'LinkedIn',
+    'hero.github': 'GitHub',
+    'about.title': 'About Me',
+    'experience.title': 'Experience',
+    'skills.title': 'Skills',
+    'connect.title': "Contact Me",
+    'about.bio1': 'Frontend Developer with 7+ years of experience specialized in Vue.js and React.',
+    'about.bio2': 'I have worked on applications for health, finance, and logistics sectors, creating intuitive interfaces and scalable systems.',
+    'about.bio3': 'Venezuelan based in Barquisimeto, available for remote, on-site work or relocation.',
+    'experience.at': 'at',
+  },
+} as const;

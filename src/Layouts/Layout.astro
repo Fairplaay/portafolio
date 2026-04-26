@@ -3,19 +3,22 @@ import Footer from '../components/Footer.astro';
 
 import '@fontsource-variable/roboto-mono';
 import '../styles.css';
+
 interface Props {
   title: string;
   description: string;
   image?: string;
 }
+
 const { title, description, image } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23242633'/%3E%3Ctext x='50' y='62' font-family='Arial' font-size='45' font-weight='bold' fill='%23dbc404' text-anchor='middle'%3EJG%3C/text%3E%3C/svg%3E" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:image" content={image ?? '/profile.jpg'} />

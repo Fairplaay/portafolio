@@ -1,28 +1,36 @@
 ---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
 export interface ExperienceItem {
   position: string;
   company: string;
   duration: string;
   responsibilities: string[];
+  positionEs: string;
+  responsibilitiesEs: string[];
 }
 
 interface Props extends ExperienceItem {}
-const { position, company, duration, responsibilities } = Astro.props;
+
+const { position, company, duration, responsibilities, positionEs, responsibilitiesEs } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const displayPosition = lang === 'en' ? position : positionEs;
+const displayResponsibilities = lang === 'en' ? responsibilities : responsibilitiesEs;
 ---
 
-<>
-  <h3>
-    {position} at {company}
-  </h3>
-  <span class="timeline-date">{duration}</span>
-  <div>
-    {
-      responsibilities.map((p) => {
-        return <p>{p}</p>;
-      })
-    }
-  </div>
-</>
+<h3>
+  {displayPosition} {t('experience.at')} {company}
+</h3>
+<span class="timeline-date">{duration}</span>
+<div>
+  {
+    displayResponsibilities.map((p) => {
+      return <p>{p}</p>;
+    })
+  }
+</div>
 
 <style>
   h3 {

@@ -1,10 +1,14 @@
 ---
 import { socialMediaIcons } from '../../assets/social/util';
 import { aboutMe } from '../../data/aboutMe';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="about">
-  <h2>Acerca de Mí</h2>
+  <h2>{t('about.title')}</h2>
   <article>
     <div class="about-profile">
       <picture>
@@ -33,7 +37,9 @@ import { aboutMe } from '../../data/aboutMe';
     </div>
     <div class="about-content">
       <h3>{aboutMe.name}</h3>
-      {aboutMe.bio.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      <p>{t('about.bio1')}</p>
+      <p>{t('about.bio2')}</p>
+      <p>{t('about.bio3')}</p>
     </div>
   </article>
 </section>

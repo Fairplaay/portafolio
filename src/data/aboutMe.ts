@@ -1,19 +1,45 @@
 export const aboutMe = {
   name: 'Jesus Garcia',
-  profession: 'Software Developer Frontend',
+  profession: 'Full Stack Developer',
   description: '"Cualquiera puede hablar. Enséñame el código" - Linus Torvalds',
   birthDate: 'Enero 16, 1988',
   nationality: 'Venezolano',
   location: 'Barquisimeto, Venezuela',
   bio: {
     paragraphs: [
-      "Desarrollador Frontend especializado en Vue.js con experiencia en el desarrollo de aplicaciones web modernas. Apasionado por crear interfaces de usuario intuitivas y experiencias digitales excepcionales.",
-      "Durante mi carrera he trabajado en el desarrollo de sistemas de facturación móvil, aplicaciones de recetas médicas y migraciones de arquitecturas AMD a ESM. Siempre en constante aprendizaje de nuevas tecnologías.",
-      "Disponible para trabajo remoto, presential o reubicación. Interesado en proyectos que desafíen mis habilidades y permitan crecimiento profesional.",
+      'Desarrollador Frontend con 7+ años de experiencia especializado en Vue.js y React.',
+      'He trabajado en aplicaciones para sectores como salud, finanzas y logística, creando interfaces intuitivas y sistemas escalables.',
+      'Disponible para trabajo remoto, presential o reubicación. Interesado en proyectos desafiantes.'
     ]
   },
   skills: ['Vue.js', 'Vue Router', 'Vuex', 'React', 'Redux', 'Node.js', 'Express', 'MongoDB', 'Docker', 'JavaScript', 'TypeScript', 'ESLint', 'Prettier'],
   hobbies: ['Creatividad', 'Código limpio', 'Documentación', 'Trabajo en equipo', 'Aprendizaje continuo'],
+  certifications: [
+    {
+      name: 'Desarrollo Web Full Stack',
+      issuer: 'Platzi',
+      year: '2018',
+      url: 'https://platzi.com'
+    },
+    {
+      name: 'Desarrollo Frontend con Vue.js',
+      issuer: 'Platzi',
+      year: '2019',
+      url: 'https://platzi.com'
+    },
+    {
+      name: 'React.js Profesional',
+      issuer: 'Platzi',
+      year: '2020',
+      url: 'https://platzi.com'
+    },
+    {
+      name: 'Docker para Desarrolladores',
+      issuer: 'Platzi',
+      year: '2021',
+      url: 'https://platzi.com'
+    }
+  ],
   profile: {
     picture: '/profile.jpeg',
     altText: "Foto de perfil de Jesus Garcia",
@@ -37,12 +63,12 @@ export const aboutMe = {
   },
   education: [
     {
-      institution: 'PLATZI.COM',
+      institution: 'Platzi',
       year: '2018',
-      description: 'Desarrollo Web Online, JavaScript, PHP, React JS, Vue JS, Webpack, SQL, MySQL, Git, Github, Bootstrap, Foundation, CSS Grid'
+      description: 'Desarrollo Web Full Stack - JavaScript, PHP, React JS, Vue JS, Webpack, SQL, MySQL, Git, Github, Bootstrap, Foundation, CSS Grid'
     },
     {
-      institution: 'CADIF1.COM',
+      institution: 'CADIF1',
       year: '2017',
       description: 'Academia de software - JavaScript, PHP'
     }

@@ -1,5 +1,30 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+const getLocalizedPath = (targetLang: string) => {
+  const segments = currentPath.split('/').filter(Boolean);
+  if (segments[0] === 'es' || segments[0] === 'en') {
+    segments[0] = targetLang;
+  } else {
+    segments.unshift(targetLang);
+  }
+  return '/' + segments.join('/');
+};
+---
+
 <footer>
-  <p>&copy; 2025 Stron <a href="https://portfolio.stron.me">Contacto</a></p>
+  <p>
+    <span>&copy; 2025 Jesus Garcia</span>
+    <span class="separator">|</span>
+    <a href={`mailto:${lang === 'es' ? 'fairplaay16@gmail.com' : 'fairplaay16@gmail.com'}`}>Contacto</a>
+    <span class="separator">|</span>
+    <a href={getLocalizedPath(lang === 'en' ? 'es' : 'en')} class="lang-toggle">
+      {lang === 'en' ? 'ES' : 'EN'}
+    </a>
+  </p>
 </footer>
 
 <style>
@@ -7,6 +32,13 @@
     text-align: center;
     padding: 20px;
     color: var(--text-color);
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
     a {
       color: var(--primary-color);
       text-decoration: none;
@@ -14,6 +46,16 @@
         text-decoration: underline;
         color: currentColor;
       }
+    }
+    .separator {
+      opacity: 0.5;
+    }
+    .lang-toggle {
+      padding: 2px 8px;
+      border: 1px solid var(--primary-color);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
     }
   }
 </style>

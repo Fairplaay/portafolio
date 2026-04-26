@@ -1,10 +1,14 @@
 ---
 import { experience } from '../../data/experience';
 import ExperienceCard, { type ExperienceItem } from '../Experience/ExperienceCard.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="experience">
-  <h2>Experience</h2>
+  <h2>{t('experience.title')}</h2>
   <ul class="timeline">
     {
       experience.map((experience: ExperienceItem) => (

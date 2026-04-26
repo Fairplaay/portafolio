@@ -2,19 +2,41 @@ export const experience = [
   {
     company: 'Nextstation',
     position: 'Frontend Developer',
+    positionEs: 'Desarrollador Frontend',
     duration: '6 meses',
     location: 'Chile - Remoto',
     responsibilities: [
-      'Con esta startup realizamos para Copecflux una Automatización de la plataforma con interconexiones SEC chile',
+      'With this startup we performed automation of the Copecflux platform with SEC Chile interconnections.',
+      'Creation of F3, TE4 and F5 forms with Vue.js, Tailwind and Chadcn UI.',
+    ],
+    responsibilitiesEs: [
+      'Con esta startup realizamos para Copecflux una Automatización de la plataforma con interconexiones SEC chile.',
       'Creacion de formularios F3, TE4 y F5 con vue js, tailwind y chadcn UI.',
     ],
   },
   {
     company: 'Plhain',
-    position: 'Full stack Developer',
+    position: 'Full Stack Developer',
+    positionEs: 'Desarrollador Full stack',
     duration: '4 años',
     location: 'Chile - Remoto',
     responsibilities: [
+      'Web app development for project management in Vue.js with Vuetify and Node.js with MongoDB.',
+      'The best ASSISTANT for pest controllers, with client management, inventory control, report generation features and more.',
+      'Creation of the application from scratch, including architecture design, frontend and backend development, and production deployment.',
+      'Google Cloud functions for task automation and data processing.',
+      'Cron jobs for scheduled tasks, such as report generation and database maintenance.',
+      'Twilio and Nodemailer for SMS and email notifications to users.',
+      'Maps API for geolocation of clients and routes for pest controllers.',
+      'Payment gateway integration for online payment processing.',
+      'Authentication and authorization implementation to guarantee user data security.',
+      'MongoDB for data storage, with efficient schema design and optimized queries.',
+      'Google Cloud for file storage, such as images and documents related to clients and projects.',
+      'Responsive and adaptive designs to guarantee optimal user experience on mobile and desktop devices.',
+      'Landing page design for application promotion, with focus on visitor to user conversion.',
+      'Landing page design for users as part of the digital marketing strategy to attract new clients.',
+    ],
+    responsibilitiesEs: [
       'Desarrollo de app web para gestión de proyectos en Vue js con vuetify y Node.js con mongodb.',
       'El mejor ASISTENTE para controladores de plagas, con funcionalidades de gestión de clientes, control de inventario, generación de informes y más.',
       'Creacion desde cero de la aplicación, incluyendo diseño de arquitectura, desarrollo frontend y backend, y despliegue en producción.',
@@ -28,15 +50,26 @@ export const experience = [
       'Google cloud para almacenamiento de archivos, como imágenes y documentos relacionados con los clientes y proyectos.',
       'Diseños responsivos y adaptativos para garantizar una experiencia de usuario óptima en dispositivos móviles y de escritorio.',
       'Diseño de landing page para promoción de la aplicación, con enfoque en conversión de visitantes a usuarios.',
-      'Diseño de landing page a los usuarios como parte de la estrategia de marketing digital para atraer nuevos clientes.'
+      'Diseño de landing page a los usuarios como parte de la estrategia de marketing digital para atraer nuevos clientes.',
     ],
   },
   {
     company: 'Hablaquí',
-    position: 'Full stack Developer',
+    position: 'Full Stack Developer',
+    positionEs: 'Desarrollador Full stack',
     duration: '1 año',
     location: 'Chile - Remoto',
     responsibilities: [
+      'Application for psychologists, management, appointment handling and patient control.',
+      'Creation of the application from scratch, including architecture design, frontend and backend development, and production deployment.',
+      'Web app development for project management in Nuxt.js and Node.js with MongoDB.',
+      'Google Calendar API for synchronization of appointments and events between the application and user calendars.',
+      'Twilio for SMS notifications to users about appointments and reminders.',
+      'MongoDB for data storage, with efficient schema design and optimized queries.',
+      'Google Cloud for file storage, such as images and documents related to patients and appointments.',
+      'Responsive and adaptive designs to guarantee optimal user experience on mobile and desktop devices.',
+    ],
+    responsibilitiesEs: [
       'Applicacion para psicologos, gestion, atencion de citas y control de pacientes.',
       'Creacion desde cero de la aplicación, incluyendo diseño de arquitectura, desarrollo frontend y backend, y despliegue en producción.',
       'Desarrollo de app web para gestión de proyectos en nuxt js y Node.js con mongodb.',
@@ -50,18 +83,30 @@ export const experience = [
   {
     company: 'app R/R Chicago',
     position: 'Frontend Developer',
-    duration: '1 meses',
+    positionEs: 'Desarrollador Frontend',
+    duration: '1 mes',
     location: 'Chicago - Remoto',
     responsibilities: [
+      'Frontend template development in React.js for R/R Chicago application.',
+    ],
+    responsibilitiesEs: [
       'Desarrollo de plantilla frontend en React.js para aplicación R/R Chicago.',
     ],
   },
   {
     company: 'Hulihealth',
     position: 'Frontend Developer',
+    positionEs: 'Desarrollador Frontend',
     duration: '1 año',
     location: 'Costa Rica - Remoto',
     responsibilities: [
+      'Vue.js development of the mobile billing section.',
+      'Development of the system to print medical prescriptions.',
+      'Migration to Vue Router of the application.',
+      'Migration of the application from AMD to ESM with Webpack.',
+      'Active collaboration with the development team.',
+    ],
+    responsibilitiesEs: [
       'Desarrollo en Vue.js de la sección de facturación móvil.',
       'Desarrollo del sistema para imprimir recetas médicas.',
       'Migración a Vue Router de la aplicación.',
@@ -72,12 +117,18 @@ export const experience = [
   {
     company: 'Shareable',
     position: 'Frontend Developer',
+    positionEs: 'Desarrollador Frontend',
     duration: '2 meses',
     location: 'Chile - Remoto',
     responsibilities: [
+      'Frontend template development in Vue.js for voting system.',
+      'Implementation of collaborative functionalities for the team.',
+      'Integration of reusable components.',
+    ],
+    responsibilitiesEs: [
       'Desarrollo de plantilla frontend en Vue.js para sistema de votaciones.',
       'Implementación de funcionalidades colaborativas para el equipo.',
       'Integración de componentes reutilizables.',
     ],
-  }
-]
+  },
+];

@@ -1,14 +1,5 @@
 ---
-import Layout from '../Layouts/Layout.astro';
-import Hero from 'src/components/sections/Hero.astro';
-import Experience from 'src/components/sections/Experience.astro';
-import About from 'src/components/sections/About.astro';
-import Skills from 'src/components/sections/Skills.astro';
+import { defaultLang } from '../i18n/ui';
 ---
-
-<Layout title="Home" description="My Portfolio">
-  <Hero />
-  <Experience />
-  <Skills />
-  <About />
-</Layout>
+<meta http-equiv="refresh" content="0;url=/es/" />
+<link rel="canonical" href={`/${defaultLang}/`} />
