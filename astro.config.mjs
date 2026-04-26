@@ -1,13 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: 'https://portafolio-2c5.pages.dev',
-  output: 'server',
-  adapter: node({
-    mode: 'standalone'
-  }),
+  output: 'static',
+  adapter: cloudflare(),
   i18n: {
     locales: ['es', 'en'],
     defaultLocale: 'es',
