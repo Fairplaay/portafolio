@@ -6,12 +6,22 @@ const currentPath = Astro.url.pathname;
 
 const getLocalizedPath = (targetLang: string) => {
   const segments = currentPath.split('/').filter(Boolean);
-  if (segments[0] === 'es' || segments[0] === 'en') {
+  
+  // Si estamos en la raíz (español por defecto) o en /es/
+  if (segments.length === 0 || segments[0] === 'es') {
+    if (segments.length === 0) {
+      // En raíz, agregar /es o /en
+      return targetLang === 'es' ? '/' : `/${targetLang}/`;
+    }
+    // En /es/, cambiar a /en/ o /
     segments[0] = targetLang;
-  } else {
-    segments.unshift(targetLang);
+  } else if (segments[0] === 'en') {
+    // En /en/, cambiar a /
+    segments[0] = targetLang;
   }
-  return '/' + segments.join('/');
+  
+  const path = '/' + segments.join('/');
+  return path.endsWith('/') ? path : path + '/';
 };
 ---
 

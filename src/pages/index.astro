@@ -1,14 +1,17 @@
 ---
-import { defaultLang } from '../i18n/ui';
+import Layout from '../Layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Experience from '../components/sections/Experience.astro';
+import Skills from '../components/sections/Skills.astro';
+import About from '../components/sections/About.astro';
+import Connect from '../components/sections/Connect.astro';
+
 ---
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0;url=/es/" />
-    <link rel="canonical" href={`/${defaultLang}/`} />
-    <title>Redirecting...</title>
-  </head>
-  <body>
-    <p>Redirecting to <a href="/es/">Spanish version</a>...</p>
-  </body>
-</html>
+
+<Layout title="Portafolio" description="Mi Portafolio - Jesus Garcia">
+  <Hero />
+  <Experience />
+  <Skills />
+  <About />
+  <Connect />
+</Layout>
