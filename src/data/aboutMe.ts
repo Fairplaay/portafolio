@@ -12,7 +12,7 @@ export const aboutMe = {
       'Disponible para trabajo remoto, presential o reubicación. Interesado en proyectos desafiantes.'
     ]
   },
-  skills: ['Vue.js', 'Vue Router', 'Vuex', 'React', 'Redux', 'Node.js', 'Express', 'MongoDB', 'Docker', 'JavaScript', 'TypeScript', 'ESLint', 'Prettier'],
+  skills: ['JavaScript', 'Vue.js','React', 'Node.js', 'MongoDB','Mongoose', 'Vue Router', 'Vuex','Pinia', 'Redux', 'Express', 'Docker', 'TypeScript', 'ESLint', 'Prettier'],
   hobbies: ['Creatividad', 'Código limpio', 'Documentación', 'Trabajo en equipo', 'Aprendizaje continuo'],
   certifications: [
     {
