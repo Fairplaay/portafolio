@@ -162,7 +162,7 @@ export const experience = [
       location: 'Chile - Remote',
       responsibilities: [
         'With this startup we performed automation of the Copecflux platform with SEC Chile interconnections.',
-        'Creation of F3, TE4 and F5 forms with Vue.js, Tailwind and Chadcn UI.',
+        'Creation of forms with Vue.js, Tailwind and Chadcn UI.',
       ],
     },
     es: {
@@ -172,7 +172,7 @@ export const experience = [
       location: 'Chile - Remoto',
       responsibilities: [
         'Con esta startup realizamos para Copecflux una Automatización de la plataforma con interconexiones SEC chile.',
-        'Creacion de formularios F3, TE4 y F5 con vue js, tailwind y chadcn UI.',
+        'Creacion de formularios con vue js, tailwind y chadcn UI.',
       ],
     },
   },

@@ -14,7 +14,6 @@ const translations = {
     'about.title': 'PERFIL PROFESIONAL',
     'experience.title': 'EXPERIENCIA LABORAL',
     'skills.title': 'HABILIDADES',
-    'education.title': 'FORMACIÓN',
     'languages.title': 'IDIOMAS',
     'contact.title': 'CONTACTO',
     'social.title': 'REDES',
@@ -25,7 +24,6 @@ const translations = {
     'about.title': 'PROFESSIONAL PROFILE',
     'experience.title': 'WORK EXPERIENCE',
     'skills.title': 'TECHNICAL SKILLS',
-    'education.title': 'EDUCATION',
     'languages.title': 'LANGUAGES',
     'contact.title': 'CONTACT',
     'social.title': 'SOCIAL',
@@ -47,6 +45,10 @@ async function generateCVHTML(lang) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CV - ${aboutData.name}</title>
   <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
     * {
       margin: 0;
       padding: 0;
@@ -58,19 +60,49 @@ async function generateCVHTML(lang) {
       line-height: 1.5;
       color: #242633;
       background: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
+
+    /* ===== SOLUCIÓN PARA FONDO MULTI-PÁGINA ===== */
+    .sidebar-bg {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 32%;
+      background: #242633;
+      z-index: 0;
+    }
+
+    /* ===== SOLUCIÓN PARA MÁRGENES ENTRE PÁGINAS ===== */
+    .layout-table {
+      width: 100%;
+      border-collapse: collapse;
+      position: relative;
+      z-index: 1;
+    }
+    .layout-table thead th,
+    .layout-table tfoot td {
+      height: 22mm; /* Esto crea un margen superior e inferior consistente en TODAS las páginas */
+      padding: 0;
+    }
+    .layout-table tbody td {
+      padding: 0;
+      vertical-align: top;
+    }
+
     .cv-container {
-      width: 210mm;
-      min-height: 297mm;
       display: flex;
-      margin: 0 auto;
+      align-items: flex-start;
+      width: 100%;
     }
+
     /* ===== SIDEBAR ===== */
     .sidebar {
       width: 32%;
-      background: #242633;
       color: #f8f9fa;
-      padding: 22mm 12mm;
+      padding: 0 12mm; /* El padding vertical lo maneja la tabla */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -143,16 +175,17 @@ async function generateCVHTML(lang) {
       padding: 2px 8px;
       border-radius: 10px;
     }
+
     /* ===== MAIN CONTENT ===== */
     .main-content {
       width: 68%;
-      padding: 22mm 18mm;
-      background: #fff;
+      padding: 0 18mm; /* El padding vertical lo maneja la tabla */
     }
     .header {
       margin-bottom: 18px;
       padding-bottom: 14px;
       border-bottom: 3px solid #2e78c7;
+      break-inside: avoid;
     }
     .header h1 {
       font-size: 26px;
@@ -181,6 +214,8 @@ async function generateCVHTML(lang) {
       display: flex;
       align-items: center;
       gap: 8px;
+      break-after: avoid;
+      page-break-after: avoid; /* Evita que el título se imprima solo al final de la página */
     }
     .section-title::before {
       content: '';
@@ -207,6 +242,8 @@ async function generateCVHTML(lang) {
       margin-bottom: 14px;
       padding-bottom: 10px;
       border-bottom: 1px solid #f1f5f9;
+      break-inside: avoid;
+      page-break-inside: avoid;
     }
     .experience-item:last-child {
       border-bottom: none;
@@ -249,122 +286,97 @@ async function generateCVHTML(lang) {
       color: #475569;
       line-height: 1.4;
     }
-    .education-item {
-      margin-bottom: 8px;
-    }
-    .education-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2px;
-    }
-    .education-institution {
-      font-weight: 700;
-      font-size: 11px;
-      color: #242633;
-    }
-    .education-year {
-      color: #2e78c7;
-      font-size: 9.5px;
-      font-weight: 600;
-    }
-    .education-desc {
-      font-size: 10px;
-      color: #64748b;
-      line-height: 1.4;
-    }
   </style>
 </head>
 <body>
-  <div class="cv-container">
-    <div class="sidebar">
-      <img src="https://portafolio-2c5.pages.dev/profile.jpeg" alt="Profile" class="profile-img">
+  <div class="sidebar-bg"></div>
+  
+  <table class="layout-table">
+    <thead>
+      <tr><th></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="cv-container">
+            <div class="sidebar">
+              <img src="https://portafolio-2c5.pages.dev/profile.jpeg" alt="Profile" class="profile-img">
 
-      <div class="sidebar-section">
-        <div class="sidebar-title">${t['contact.title']}</div>
-        <p>${aboutData.contact.email}</p>
-        <p>${aboutData.contact.phone}</p>
-        <p>${aboutData.location}</p>
-      </div>
+              <div class="sidebar-section">
+                <div class="sidebar-title">${t['contact.title']}</div>
+                <p>${aboutData.contact.email}</p>
+                <p>${aboutData.contact.phone}</p>
+                <p>${aboutData.location}</p>
+              </div>
 
-      <div class="sidebar-section">
-        <div class="sidebar-title">${t['social.title']}</div>
-        <a href="${aboutData.socialMedia.linkedin}">LinkedIn</a>
-        <a href="${aboutData.socialMedia.github}">GitHub</a>
-        <a href="${aboutData.socialMedia.website}">Website</a>
-      </div>
+              <div class="sidebar-section">
+                <div class="sidebar-title">${t['social.title']}</div>
+                <a href="${aboutData.socialMedia.linkedin}">LinkedIn</a>
+                <a href="${aboutData.socialMedia.github}">GitHub</a>
+                <a href="${aboutData.socialMedia.website}">Website</a>
+              </div>
 
-      <div class="sidebar-section">
-        <div class="sidebar-title">${t['skills.title']}</div>
-        <div class="skills">
-          ${aboutData.skills.map((skill) => `<span class="skill">${skill}</span>`).join('')}
-        </div>
-      </div>
+              <div class="sidebar-section">
+                <div class="sidebar-title">${t['skills.title']}</div>
+                <div class="skills">
+                  ${aboutData.skills.map((skill) => `<span class="skill">${skill}</span>`).join('')}
+                </div>
+              </div>
 
-      <div class="sidebar-section">
-        <div class="sidebar-title">${t['languages.title']}</div>
-        <div class="languages">
-          <div class="language">
-            <span class="language-name">${aboutData.languages.native}</span>
-            <span class="language-level">${t['native.label']}</span>
-          </div>
-          <div class="language">
-            <span class="language-name">${aboutData.languages.foreign}</span>
-            <span class="language-level">${t['foreign.label']}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="main-content">
-      <div class="header">
-        <h1>${aboutData.name}</h1>
-        <h2>${aboutData.profession}</h2>
-      </div>
-
-      <div class="section">
-        <div class="section-title">${t['about.title']}</div>
-        ${aboutData.bio.paragraphs.map((p) => `<p class="bio-text">${p}</p>`).join('')}
-      </div>
-
-      <div class="section">
-        <div class="section-title">${t['experience.title']}</div>
-        ${experiences
-          .map(
-            (exp) => `
-          <div class="experience-item">
-            <div class="job-header">
-              <div class="job-title">${exp.position}</div>
-              <div class="job-duration">${exp.duration}</div>
+              <div class="sidebar-section">
+                <div class="sidebar-title">${t['languages.title']}</div>
+                <div class="languages">
+                  <div class="language">
+                    <span class="language-name">${aboutData.languages.native}</span>
+                    <span class="language-level">${t['native.label']}</span>
+                  </div>
+                  <div class="language">
+                    <span class="language-name">${aboutData.languages.foreign}</span>
+                    <span class="language-level">${t['foreign.label']}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="job-company">${exp.company} — ${exp.location}</div>
-            <ul class="responsibilities">
-              ${exp.responsibilities.map((r) => `<li>${r}</li>`).join('')}
-            </ul>
-          </div>
-        `,
-          )
-          .join('')}
-      </div>
 
-      <div class="section">
-        <div class="section-title">${t['education.title']}</div>
-        ${aboutData.education
-          .map(
-            (edu) => `
-          <div class="education-item">
-            <div class="education-header">
-              <div class="education-institution">${edu.institution}</div>
-              <div class="education-year">${edu.year}</div>
+            <div class="main-content">
+              <div class="header">
+                <h1>${aboutData.name}</h1>
+                <h2>${aboutData.profession}</h2>
+              </div>
+
+              <div class="section">
+                <div class="section-title">${t['about.title']}</div>
+                ${aboutData.bio.paragraphs.map((p) => `<p class="bio-text">${p}</p>`).join('')}
+              </div>
+
+              <div class="section">
+                <div class="section-title">${t['experience.title']}</div>
+                ${experiences
+                  .map(
+                    (exp) => `
+                  <div class="experience-item">
+                    <div class="job-header">
+                      <div class="job-title">${exp.position}</div>
+                      <div class="job-duration">${exp.duration}</div>
+                    </div>
+                    <div class="job-company">${exp.company} — ${exp.location}</div>
+                    <ul class="responsibilities">
+                      ${exp.responsibilities.map((r) => `<li>${r}</li>`).join('')}
+                    </ul>
+                  </div>
+                `,
+                  )
+                  .join('')}
+              </div>
             </div>
-            <div class="education-desc">${edu.description}</div>
           </div>
-        `,
-          )
-          .join('')}
-      </div>
-    </div>
-  </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><td></td></tr>
+    </tfoot>
+  </table>
 </body>
 </html>
   `;
@@ -383,7 +395,8 @@ async function generatePDF(html, outputPath) {
     path: outputPath,
     format: 'A4',
     printBackground: true,
-    margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' },
+    margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' }, // Mantenlo en 0. La tabla se encarga de los márgenes
+    preferCSSPageSize: true,
   });
   await browser.close();
 }
