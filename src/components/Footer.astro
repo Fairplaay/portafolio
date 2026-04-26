@@ -7,37 +7,66 @@ const currentPath = Astro.url.pathname;
 const getLocalizedPath = (targetLang: string) => {
   const segments = currentPath.split('/').filter(Boolean);
   
-  // Si estamos en la raíz (español por defecto) o en /es/
   if (segments.length === 0 || segments[0] === 'es') {
     if (segments.length === 0) {
-      // En raíz, agregar /es o /en
-      return targetLang === 'es' ? '/' : `/${targetLang}/`;
+      return targetLang === 'es' ? '/es/' : '/en/';
     }
-    // En /es/, cambiar a /en/ o /
     segments[0] = targetLang;
   } else if (segments[0] === 'en') {
-    // En /en/, cambiar a /
     segments[0] = targetLang;
   }
   
   const path = '/' + segments.join('/');
   return path.endsWith('/') ? path : path + '/';
 };
+
+const cvUrl = lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf';
 ---
+
+<div class="lang-toggle-top">
+  <a href={getLocalizedPath(lang === 'en' ? 'es' : 'en')} title={lang === 'en' ? 'Cambiar a Español' : 'Switch to English'}>
+    {lang === 'en' ? 'ES' : 'EN'}
+  </a>
+</div>
 
 <footer>
   <p>
     <span>&copy; 2025 Jesus Garcia</span>
     <span class="separator">|</span>
-    <a href={`mailto:${lang === 'es' ? 'fairplaay16@gmail.com' : 'fairplaay16@gmail.com'}`}>Contacto</a>
+    <a href={`mailto:fairplaay16@gmail.com`}>Contacto</a>
     <span class="separator">|</span>
-    <a href={getLocalizedPath(lang === 'en' ? 'es' : 'en')} class="lang-toggle">
-      {lang === 'en' ? 'ES' : 'EN'}
-    </a>
+    <a href={cvUrl} target="_blank" rel="noopener noreferrer">CV ({lang === 'es' ? 'ES' : 'EN'})</a>
   </p>
 </footer>
 
 <style>
+  .lang-toggle-top {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      background: var(--primary-color);
+      color: #ffffff;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+        background: var(--secundary-color);
+      }
+    }
+  }
+
   footer {
     text-align: center;
     padding: 20px;
@@ -59,13 +88,6 @@ const getLocalizedPath = (targetLang: string) => {
     }
     .separator {
       opacity: 0.5;
-    }
-    .lang-toggle {
-      padding: 2px 8px;
-      border: 1px solid var(--primary-color);
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: 600;
     }
   }
 </style>

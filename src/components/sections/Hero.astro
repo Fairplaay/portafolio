@@ -4,7 +4,7 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const cvDownloadUrl = `/api/cv/${lang}`;
+const cvDownloadUrl = lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf';
 ---
 
 <section id="hero">

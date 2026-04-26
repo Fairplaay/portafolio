@@ -1,5 +1,6 @@
 ---
 import Footer from '../components/Footer.astro';
+import { getLangFromUrl } from '../i18n/utils';
 
 import '@fontsource-variable/roboto-mono';
 import '../styles.css';
@@ -11,10 +12,11 @@ interface Props {
 }
 
 const { title, description, image } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,9 +24,11 @@ const { title, description, image } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:image" content={image ?? '/profile.jpg'} />
+    <link rel="alternate" hreflang="es" href={`https://portafolio-2c5.pages.dev/es/`} />
+    <link rel="alternate" hreflang="en" href={`https://portafolio-2c5.pages.dev/en/`} />
   </head>
   <body>
     <main><slot /></main>
+    <Footer />
   </body>
-  <Footer />
 </html>
