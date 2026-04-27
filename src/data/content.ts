@@ -8,7 +8,7 @@ export const aboutMe = {
     location: 'Barquisimeto, Venezuela',
     bio: {
       paragraphs: [
-        'Frontend Developer with 7+ years of experience specialized in Vue.js and React.',
+        'Fullstack Developer with 7+ years of experience specialized in Vue.js and React.',
         'I have worked on applications for sectors such as health, finance, and logistics, creating intuitive interfaces and scalable systems.',
         'Available for remote work, on-site or relocation. Interested in challenging projects.'
       ]
@@ -84,7 +84,7 @@ export const aboutMe = {
     location: 'Barquisimeto, Venezuela',
     bio: {
       paragraphs: [
-        'Desarrollador Frontend con 7+ años de experiencia especializado en Vue.js y React.',
+        'Desarrollador fullstack con 7+ años de experiencia especializado en Vue.js y React.',
         'He trabajado en aplicaciones para sectores como salud, finanzas y logística, creando interfaces intuitivas y sistemas escalables.',
         'Disponible para trabajo remoto, presential o reubicación. Interesado en proyectos desafiantes.'
       ]

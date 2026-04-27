@@ -8,42 +8,58 @@ export const aboutMe = {
     location: 'Barquisimeto, Venezuela',
     bio: {
       paragraphs: [
-        'Frontend Developer with 7+ years of experience specialized in Vue.js and React.',
+        'Fullstack Developer with 7+ years of experience specialized in Vue.js and React.',
         'I have worked on applications for sectors such as health, finance, and logistics, creating intuitive interfaces and scalable systems.',
-        'Available for remote work, on-site or relocation. Interested in challenging projects.'
-      ]
+        'Available for remote work, on-site or relocation. Interested in challenging projects.',
+      ],
     },
-    skills: ['JavaScript', 'Vue.js', 'React', 'Node.js', 'MongoDB', 'Mongoose', 'Vue Router', 'Vuex', 'Pinia', 'Redux', 'Express', 'Docker', 'TypeScript', 'ESLint', 'Prettier'],
+    skills: [
+      'JavaScript',
+      'Vue.js',
+      'React',
+      'Node.js',
+      'MongoDB',
+      'Mongoose',
+      'Vue Router',
+      'Vuex',
+      'Pinia',
+      'Redux',
+      'Express',
+      'Docker',
+      'TypeScript',
+      'ESLint',
+      'Prettier',
+    ],
     hobbies: ['Creativity', 'Clean Code', 'Documentation', 'Team Work', 'Continuous Learning'],
     certifications: [
       {
         name: 'Full Stack Web Development',
         issuer: 'Platzi',
         year: '2018',
-        url: 'https://platzi.com'
+        url: 'https://platzi.com',
       },
       {
         name: 'Frontend Development with Vue.js',
         issuer: 'Platzi',
         year: '2019',
-        url: 'https://platzi.com'
+        url: 'https://platzi.com',
       },
       {
         name: 'React.js Professional',
         issuer: 'Platzi',
         year: '2020',
-        url: 'https://platzi.com'
+        url: 'https://platzi.com',
       },
       {
         name: 'Docker for Developers',
         issuer: 'Platzi',
         year: '2021',
-        url: 'https://platzi.com'
-      }
+        url: 'https://platzi.com',
+      },
     ],
     profile: {
       picture: '/profile.jpeg',
-      altText: "Profile picture of Jesus Garcia",
+      altText: 'Profile picture of Jesus Garcia',
     },
     banner: {
       image: 'https://picsum.photos/id/4/750/200',
@@ -60,20 +76,21 @@ export const aboutMe = {
     },
     languages: {
       native: 'Spanish',
-      foreign: 'Basic written English'
+      foreign: 'Basic written English',
     },
     education: [
       {
         institution: 'Platzi',
         year: '2018',
-        description: 'Full Stack Web Development - JavaScript, PHP, React JS, Vue JS, Webpack, SQL, MySQL, Git, Github, Bootstrap, Foundation, CSS Grid'
+        description:
+          'Full Stack Web Development - JavaScript, PHP, React JS, Vue JS, Webpack, SQL, MySQL, Git, Github, Bootstrap, Foundation, CSS Grid',
       },
       {
         institution: 'CADIF1',
         year: '2017',
-        description: 'Software Academy - JavaScript, PHP'
-      }
-    ]
+        description: 'Software Academy - JavaScript, PHP',
+      },
+    ],
   },
   es: {
     name: 'Jesus Garcia',
@@ -84,42 +101,64 @@ export const aboutMe = {
     location: 'Barquisimeto, Venezuela',
     bio: {
       paragraphs: [
-        'Desarrollador Frontend con 7+ años de experiencia especializado en Vue.js y React.',
+        'Desarrollador Fullstack con 7+ años de experiencia especializado en Vue.js y React.',
         'He trabajado en aplicaciones para sectores como salud, finanzas y logística, creando interfaces intuitivas y sistemas escalables.',
-        'Disponible para trabajo remoto, presential o reubicación. Interesado en proyectos desafiantes.'
-      ]
+        'Disponible para trabajo remoto, presential o reubicación. Interesado en proyectos desafiantes.',
+      ],
     },
-    skills: ['JavaScript', 'Vue.js','React', 'Node.js', 'MongoDB','Mongoose', 'Vue Router', 'Vuex','Pinia', 'Redux', 'Express', 'Docker', 'TypeScript', 'ESLint', 'Prettier'],
-    hobbies: ['Creatividad', 'Código limpio', 'Documentación', 'Trabajo en equipo', 'Aprendizaje continuo'],
+    skills: [
+      'JavaScript',
+      'Vue.js',
+      'React',
+      'Node.js',
+      'MongoDB',
+      'Mongoose',
+      'Vue Router',
+      'Vuex',
+      'Pinia',
+      'Redux',
+      'Express',
+      'Docker',
+      'TypeScript',
+      'ESLint',
+      'Prettier',
+    ],
+    hobbies: [
+      'Creatividad',
+      'Código limpio',
+      'Documentación',
+      'Trabajo en equipo',
+      'Aprendizaje continuo',
+    ],
     certifications: [
       {
         name: 'Desarrollo Web Full Stack',
         issuer: 'Platzi',
         year: '2018',
-        url: 'https://platzi.com'
+        url: 'https://platzi.com',
       },
       {
         name: 'Desarrollo Frontend con Vue.js',
         issuer: 'Platzi',
         year: '2019',
-        url: 'https://platzi.com'
+        url: 'https://platzi.com',
       },
       {
         name: 'React.js Profesional',
         issuer: 'Platzi',
         year: '2020',
-        url: 'https://platzi.com'
+        url: 'https://platzi.com',
       },
       {
         name: 'Docker para Desarrolladores',
         issuer: 'Platzi',
         year: '2021',
-        url: 'https://platzi.com'
-      }
+        url: 'https://platzi.com',
+      },
     ],
     profile: {
       picture: '/profile.jpeg',
-      altText: "Foto de perfil de Jesus Garcia",
+      altText: 'Foto de perfil de Jesus Garcia',
     },
     banner: {
       image: 'https://picsum.photos/id/4/750/200',
@@ -136,21 +175,22 @@ export const aboutMe = {
     },
     languages: {
       native: 'Español',
-      foreign: 'Inglés básico escrito'
+      foreign: 'Inglés básico escrito',
     },
     education: [
       {
         institution: 'Platzi',
         year: '2018',
-        description: 'Desarrollo Web Full Stack - JavaScript, PHP, React JS, Vue JS, Webpack, SQL, MySQL, Git, Github, Bootstrap, Foundation, CSS Grid'
+        description:
+          'Desarrollo Web Full Stack - JavaScript, PHP, React JS, Vue JS, Webpack, SQL, MySQL, Git, Github, Bootstrap, Foundation, CSS Grid',
       },
       {
         institution: 'CADIF1',
         year: '2017',
-        description: 'Academia de software - JavaScript, PHP'
-      }
-    ]
-  }
+        description: 'Academia de software - JavaScript, PHP',
+      },
+    ],
+  },
 };
 
 export const experience = [
@@ -262,9 +302,7 @@ export const experience = [
       position: 'Frontend Developer',
       duration: '1 month',
       location: 'Chicago - Remote',
-      responsibilities: [
-        'Frontend template development in React.js for R/R Chicago application.',
-      ],
+      responsibilities: ['Frontend template development in React.js for R/R Chicago application.'],
     },
     es: {
       company: 'app R/R Chicago',
