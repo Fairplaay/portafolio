@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Import data from centralized content
-import { aboutMe, experience } from '../src/data/content.ts';
+import { aboutMe, experience } from '../src/data/content.js';
 
 const translations = {
   es: {
